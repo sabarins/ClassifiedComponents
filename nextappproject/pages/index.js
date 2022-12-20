@@ -7,6 +7,9 @@ import client from '../client';
 // importing all categories cards as a component
 import AllCtegoriescards from './Components/AllCtegoriescards';
 
+//import category component
+import Categories from './Categories';
+
 
 export default function Home({ jobsdata,automobilesdata,servicesdata }) {
   console.log(jobsdata.allJobs.nodes);
@@ -23,6 +26,11 @@ export default function Home({ jobsdata,automobilesdata,servicesdata }) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
       </Head>
 
+
+      <div>
+        <Categories />
+      </div>
+
       <div className='displayallcards'>
         <AllCtegoriescards allcategorydata = {jobsdata} amdata={automobilesdata} servicedata={servicesdata}/>
       </div>
@@ -31,7 +39,7 @@ export default function Home({ jobsdata,automobilesdata,servicesdata }) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const { data } = await client.query({
     query: gql`
       query NewQuery {

@@ -43,6 +43,7 @@ export default function AllCtegoriescards({allcategorydata,amdata,servicedata}) 
 
   return (
     <div>
+      <p onClick={()=>{router.push(`/`)}}>Hello</p>
         <div class="container">
           <div class="row">
             {
@@ -56,6 +57,7 @@ export default function AllCtegoriescards({allcategorydata,amdata,servicedata}) 
                             <Link href={`${ele.uri}`} class="tag" style={{textTransform:"uppercase",marginLeft:"30px"}}><i>{ele.title}</i></Link>
                             <div class="content">
                               <p>Qualification : <span style={{fontWeight:"bold"}}>{ele.jobsFeatures.qualification}</span></p>
+                              <p>Location : {ele.jobsFeatures.location}</p>
                               <span class="text-muted">{ele.date}</span>
                             </div>
                           </article>
