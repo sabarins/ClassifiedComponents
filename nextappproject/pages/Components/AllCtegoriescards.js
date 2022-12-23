@@ -43,7 +43,6 @@ export default function AllCtegoriescards({allcategorydata,amdata,servicedata}) 
 
   return (
     <div>
-      <p onClick={()=>{router.push(`/`)}}>Hello</p>
         <div class="container">
           <div class="row">
             {

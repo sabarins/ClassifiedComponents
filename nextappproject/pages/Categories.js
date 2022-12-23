@@ -7,10 +7,10 @@ export default function Categories() {
 
   const router = useRouter();
   return (
-    <div>Caategories
-      <p>
-        <a onClick={()=>{router.push()}}>Services</a>
-      </p>
+    <div className='categorieslist' style={{display:"flex",columnGap:"50px"}}>
+        <a style={{cursor:'pointer'}} onClick={()=>{router.push(`/service`)}}>Services</a>
+        <a style={{cursor:'pointer'}} onClick={()=>{router.push(`/jobs`)}}>Jobs</a>
+        <a style={{cursor:'pointer'}} onClick={()=>{router.push(`/automobiles`)}}>Automobiles</a>
     </div>
   )
 }
