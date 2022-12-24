@@ -43,13 +43,16 @@ export default function Dynamicategories({ jobsdata, automobilesdata, servicesda
 
   return (
     <div>
-      Dynamic categories page for {router.query.category}
+      Dynamic Category page for {router.query.category}
       <div style={{display:"flex",columnGap:"10px"}}>
         <div>
-          <Link href="/">Home</Link>
+          <p><Link href="/">Home</Link></p>
         </div>
         <div>
           <label>/</label>
+        </div>
+        <div>
+          <p><a href='' onClick={()=>{router.push(`/${router.query.category}`)}} >{router.query.category}</a></p>
         </div>
       </div>
       {service ?
@@ -137,67 +140,54 @@ export default function Dynamicategories({ jobsdata, automobilesdata, servicesda
 export async function getServerSideProps() {
   const { data } = await client.query({
     query: gql`
-      query NewQuery {
-        allJobs {
-          nodes {
-            jobsFeatures {
-              address
-              alternateContactNumber
-              computerClass
-              contactNumber
-              courseDetails
-              delivery
-              distributorsWanted
-              driver
-              fieldGroupName
-              homeCare
-              itCandidates
-              listOfPosition
-              location
-              qualification
-              salesMarketing
-              tailorCourse
-              tailoringVacancy
-            }
-            title
-            jobsId
-            date
-            blocksJSON
-            uri
+    query NewQuery {
+      allJobs {
+        nodes {
+          jobsFeatures {
+            address
+            alternateContactNumber
+            computerClass
+            contactNumber
+            courseDetails
+            delivery
+            distributorsWanted
+            driver
+            fieldGroupName
+            homeCare
+            itCandidates
+            listOfPosition
+            location
+            qualification
+            salesMarketing
+            tailorCourse
+            tailoringVacancy
           }
+          title
+          jobsId
+          date
+          blocksJSON
+          uri
         }
-        allAutomobiles {
-          nodes {
-            automobilesFeature {
-              address
-              alternateContactNumber
-              bicycles
-              car
-              contactNumber
-              description
-              fieldGroupName
-              location
-              motorcycles
-              scooters
-              spareParts
-            }
-            title
-            uri
-            date
-          }
+      }
+      allAutomobiles {
+        nodes {
+          title
+          uri
+          date
         }
-        allService {
-          nodes {
-            date
-            title
-            uri
-            serviceFeatures {
-              fieldGroupName
-            }
+      }
+      allService {
+        nodes {
+          date
+          title
+          uri
+          serviceFeatures {
+            fieldGroupName
           }
         }
       }
-      `
+    }
+    `
   });
   console.log("h", data.allAutomobiles, "d", data.allService);
   return {
