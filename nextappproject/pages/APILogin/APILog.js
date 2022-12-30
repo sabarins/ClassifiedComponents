@@ -7,12 +7,12 @@ import axios from "axios";
 // import Logout from "../Logout";
 // import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useRouter } from 'next/router'
-
+import Logout from "../Components/Logout";
+import Log from "./Log";
 
 
 export default function indexLogin() {
   let router = useRouter();
-
 
 
   // const { data: session } = useSession();
@@ -41,12 +41,13 @@ export default function indexLogin() {
 
   let [status, setStatus] = useState("");
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-    });
-  })
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(function (position) {
+  //     console.log("Latitude is :", position.coords.latitude);
+  //     console.log("Longitude is :", position.coords.longitude);
+  //   });
+  // })
+  
 
   function send() {
 
@@ -85,6 +86,9 @@ export default function indexLogin() {
 
     localStorage.setItem("name", name);
 
+    localStorage.setItem("logged","false");
+
+
   }
 
 
@@ -102,6 +106,8 @@ export default function indexLogin() {
 
     // Locally storing...
     localStorage.setItem("name", name);
+
+    localStorage.logged = "true"
 
     if (username === "0") {
       document.getElementById('nameinp').style.display = "block";
@@ -125,7 +131,38 @@ export default function indexLogin() {
 
   let [lstorage, setLstorage] = useState();
 
+  let [getlocalstorage,setGetlocalstorage] = useState("");
 
+  let [logged,setLogged] = useState(false);
+
+  useEffect(()=>
+  {
+
+    setGetlocalstorage(localStorage.getItem("name"));
+
+    if(getlocalstorage!=null && getlocalstorage!="")
+      {
+        console.log("Logged On",getlocalstorage);
+        setLogged(true);
+      }
+      else
+      {
+        console.log("Logged Off");
+        setLogged(false);
+      }
+
+      if(logged)
+      {
+        document.getElementById("loginon").style.display = "none";
+
+      }
+  })
+
+  console.log(logged);
+function log()
+{
+  <Log></Log>
+}
   return (
     <div>
       <div className="headerbody">
@@ -133,10 +170,10 @@ export default function indexLogin() {
         <div className="logn">
           <button
             onClick={(e) => {
-              e.preventDefault();
-              showlogin();
+              // e.preventDefault();
+              log();
             }}
-            className="loginbtn"
+            className="loginbtn btn btn-brand ms-3"
             id="loginon"
           >
             Login
@@ -163,9 +200,12 @@ export default function indexLogin() {
             Logout
           </button> */}
         </div>
-
-
-        <div className="rui-3edbr Fy4_1" id="hideshow">
+        <div>
+        <p>
+          {logged ? <Logout /> : null}
+        </p>
+      </div>
+       {/* <div className="rui-3edbr Fy4_1" id="hideshow">
           <div className="ZspKa">
             <span className="-_djW" data-aut-id="btnClose">
               <svg
@@ -229,9 +269,6 @@ export default function indexLogin() {
                 </div>
               </div>
 
-              {/* <p id="submsg" style={{ display: "none", color: "green" }}>
-                  OTP has been sent from entered phone number!
-                </p> */}
               <div id="hidetxtnumandeditbtn" style={{ display: "flex", columnGap: "20px", fontSize: "15px" }}>
                 <div>
                   <p id="senttext" style={{ display: "none" }}>We sent a 4 digit code to <b>+91{number}</b></p>
@@ -260,17 +297,12 @@ export default function indexLogin() {
                     placeholder="Enter OTP"
                     id="getotp"
                   ></input>
-                  {/* <button onClick={otpverification}>Submit</button> */}
                 </div>
                 <button style={{ marginTop: "20px" }}
                   type="submit"
                   onClick={() => {
                     otpverification();
-                    // if (status === "1") {
-                    //   console.log(status);
-                    //   document.getElementById("submsg").style.display =
-                    //     "none";
-                    // }
+                 
 
                   }}
                   className="rui-39-wj rui-3mpqt rui-1JPTg _2sWUW "
@@ -323,7 +355,8 @@ export default function indexLogin() {
                     }
                     else 
                     {
-                      router.push('/Logout');
+                      document.getElementById("loginon").style.display = "none";
+                      document.getElementById("hideshow").style.display = "none";
                     }
                   }}>
                     Continue
@@ -332,31 +365,10 @@ export default function indexLogin() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      {/* <div className="box">
-        <div className="boxbody" onClick={() => {
-          if (status === "0") {
-            alert("Please Login");
-          }
-          else {
-            router.push('./Logout')
-          }
-        }}>
-          <div className="image">
-            <img src=""></img>
-          </div>
-        </div>
-        <div className="boxbody">
-          <div className="image">
-          </div>
-        </div>
-        <div className="boxbody">
-          <div className="image">
-          </div>
-        </div>
+        </div> */}
 
-      </div> */}
+      </div>
+     
     </div>
   );
 }

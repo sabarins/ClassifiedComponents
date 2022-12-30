@@ -3,15 +3,23 @@ import { useRouter } from 'next/router'
 import Link from 'next/link';
 import { gql } from "@apollo/client";
 import client from '../../client';
-import Header from '../Components/Header';
 import axios from 'axios';
 import Logout from '../Components/Logout';
+import WayNavbar from '../WayNavbar';
+import Format from "../layout/Format"
+import Bredcrumb from "../Components/_child/bredcrumb"
+import Filterproperty from "../Components/filterproperty"
+import Advtsmall from "../Components/advtsmall"
+import Header from '../Components/header';
+import APILog from '../APILogin/APILog'
+
+
 
 
 
 export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatures}) {
 
-  console.log(categorydetail,automobilefeatures,jobsfeatures);
+  // console.log(categorydetail,automobilefeatures,jobsfeatures);
 
 
     let router = useRouter();
@@ -29,16 +37,21 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
 
   let [status, setStatus] = useState("");
 
+ let [log,setLog] = useState("");
     useEffect(()=>
     {
+      // window.location.reload();
+      // window.location.reload(setLogged);
       setCategorydetails(categorydetail);
+      // setLog(localStorage.getItem("logged"));
+
 
       setGetlocalstorage(localStorage.getItem("name"));
-
+  
       if(getlocalstorage!=null && getlocalstorage!="")
       {
-        console.log("Logged On",getlocalstorage);
         setLogged(true);
+        console.log("Logged On",getlocalstorage);
       }
       else
       {
@@ -46,9 +59,8 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
         setLogged(false);
       }
 
-    })
-   
-    console.log(logged);
+    });
+  
 
     function send() {
 
@@ -111,16 +123,21 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
       // router.push('/Login');
     }
   
-    if(logged)
-    {
-      document.getElementById("logoutt").style.display = "block";
+    // if(logged)
+    // {
+    //   // document.getElementById("logoutt").style.display = "block";
 
-      document.getElementById("login").style.display = "none";
-    }
+    //   // document.getElementById("loginon").style.display = "none";
+    //   console.log(logged);
+
+    // }
   return (
-    <div>
-
-    <div className="rui-3edbr Fy4_1" id="hideshow">
+      <Format>
+      <Bredcrumb></Bredcrumb>
+    <div className="container">
+      <div className="row">
+        <div className="col-xl-9 col-lg-8 col-md-12">
+        <div className="rui-3edbr Fy4_1" id="hideshow">
           <div className="ZspKa">
             <span className="-_djW" data-aut-id="btnClose">
               <svg
@@ -184,9 +201,6 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
                 </div>
               </div>
 
-              {/* <p id="submsg" style={{ display: "none", color: "green" }}>
-                  OTP has been sent from entered phone number!
-                </p> */}
               <div id="hidetxtnumandeditbtn" style={{ display: "flex", columnGap: "20px", fontSize: "15px" }}>
                 <div>
                   <p id="senttext" style={{ display: "none" }}>We sent a 4 digit code to <b>+91{number}</b></p>
@@ -215,18 +229,12 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
                     placeholder="Enter OTP"
                     id="getotp"
                   ></input>
-                  {/* <button onClick={otpverification}>Submit</button> */}
                 </div>
                 <button style={{ marginTop: "20px" }}
                   type="submit"
                   onClick={() => {
                     otpverification();
-                    // if (status === "1") {
-                    //   console.log(status);
-                    //   document.getElementById("submsg").style.display =
-                    //     "none";
-                    // }
-
+                  
                   }}
                   className="rui-39-wj rui-3mpqt rui-1JPTg _2sWUW "
                 >
@@ -263,6 +271,7 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
                 <input
                   onChange={(e) => {
                     setName(e.target.value);
+                    setLogged(true);
                   }}
                   name="phone"
                   type="text"
@@ -278,10 +287,8 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
                     }
                     else 
                     {
-                      // router.push('/Logout')
-                      document.getElementById("login").style.display = "none";
+                     
                       document.getElementById("hideshow").style.display = "none";
-                      document.getElementById("logoutt").style.display = "block";
                     }
                   }}>
                     Continue
@@ -291,30 +298,33 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
             </div>
           </div>
         </div>
-      
-      <div id='login'>
-        <Header /> 
-      </div>
-      <div id='logoutt'>
-        <p>
-          {logged ? <Logout /> : null}
-        </p>
-      </div>
-      DetailsPage for {router.query.uri} {router.query.name}
-      <div>
-        <p>Contact Number : 
-          <span>
-            {logged ? automobilefeatures.contactNumber : <a href="#hideshow" onClick={()=>{
-              document.getElementById("hideshow").style.display = "flex";
-              }} style={{color:"skyblue"}}>Show number</a>}
-          </span>
+          {/* <Detailcard></Detailcard> */}
+         <div>
+     
+          DetailsPage for {router.query.uri} {router.query.name}
+          <div>
+            <p>Contact Number : 
+              <span>
+                {logged  ? <span style={{fontWeight:"bolder"}}>{automobilefeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
+               document.getElementById("hideshow").style.display = "flex" 
+                }} style={{color:"skyblue"}}> Show number</a> }
+             </span>
         </p>   
       </div>  
     </div>
+    </div>
+    <div className="col-xl-3 col-lg-4 col-md-12"> 
+      <Advtsmall></Advtsmall>
+      {/* <Filterproperty></Filterproperty> */}
+    </div>
+    </div>
+    </div>
+    </Format>
+   
   )
 }
 
-
+// `"jobs/${router.query.name}"` ? <span style={{fontWeight:"bolder"}}>{jobsfeatures.contactNumber}</span> : null
 export async function getServerSideProps(context)
 {
 
@@ -340,23 +350,17 @@ export async function getServerSideProps(context)
           fieldGroupName
          }
      }
-    ... on Automobiles {
+     ... on Automob {
       id
-      automobilesFeature {
-        motorcycles {
-          brandAndModel {
-            allBrands {
-              tvs
-            }
-            allModels {
-              heroAchiever
-            }
-          }
-        }
-        contactNumber
-      }
+      title
       uri
-      date
+      automobfeatures {
+        address
+        alternateContactNumber
+        contactNumber
+        description
+        location
+      }
     }
     uri
   }
@@ -372,7 +376,7 @@ export async function getServerSideProps(context)
     {
       categorydetail : data.nodeByUri,
       jobsfeatures : data.nodeByUri.jobsFeatures  || null,
-      automobilefeatures : data.nodeByUri.automobilesFeature || null,
+      automobilefeatures : data.nodeByUri.automobfeatures || null,
     }
   }
 }

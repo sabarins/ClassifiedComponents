@@ -53,11 +53,12 @@ export default function AllCtegoriescards({allcategorydata,amdata,servicedata}) 
                         <div class="col-md-3 col-6" key={ind}>
                           <article class="blog-post">
                             <img alt="jobimg" src="https://apollo-singapore.akamaized.net/v1/files/6u4rj8ixy3c31-IN/image;s=300x600;q=60" />
-                            <Link href={`${ele.uri}`} class="tag" style={{textTransform:"uppercase",marginLeft:"30px"}}><i>{ele.title}</i></Link>
+                            <a href={`${ele.uri}`} class="tag" style={{textTransform:"uppercase",marginLeft:"30px"}}><i>{ele.title}</i></a>
                             <div class="content">
                               <p>Qualification : <span style={{fontWeight:"bold"}}>{ele.jobsFeatures.qualification}</span></p>
                               <p>Location : {ele.jobsFeatures.location}</p>
-                              <span class="text-muted">{ele.date}</span>
+                              <span style={{fontWeight:"bold"}}>Jobs</span>
+                              <span style={{fontWeight:"bold"}} class="text-muted">{ele.date}</span>
                             </div>
                           </article>
                         </div>
@@ -69,7 +70,7 @@ export default function AllCtegoriescards({allcategorydata,amdata,servicedata}) 
                         <div class="col-md-3 col-6" key={ind}>
                           <article class="blog-post">
                             <img alt="jobimg" src="https://apollo-singapore.akamaized.net/v1/files/6u4rj8ixy3c31-IN/image;s=300x600;q=60" />
-                            <Link href={`${ele.uri}`} class="tag" style={{textTransform:"uppercase",marginLeft:"30px"}}><i>{ele.title}</i></Link>
+                            <a href={`${ele.uri}`} class="tag" style={{textTransform:"uppercase",marginLeft:"30px"}}><i>{ele.title}</i></a>
                             <div class="content">
                               <span class="text-muted">{ele.date}</span>
                             </div>
