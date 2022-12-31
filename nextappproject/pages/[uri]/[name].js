@@ -12,8 +12,8 @@ import Filterproperty from "../Components/filterproperty"
 import Advtsmall from "../Components/advtsmall"
 import Header from '../Components/header';
 import APILog from '../APILogin/APILog'
-
-
+import Image from "next/image";
+import houseImage from '/public/img/housesale.jpg';
 
 
 
@@ -134,9 +134,92 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
   return (
       <Format>
       <Bredcrumb></Bredcrumb>
+     
     <div className="container">
       <div className="row">
         <div className="col-xl-9 col-lg-8 col-md-12">
+        <div className="card overflow-hidden mt-3 mb-3"> <div className="ribbon ribbon-top-right text-danger"><span className="bg-primary">featured</span></div> <div className="card-body h-100 boot-slider"> <div className="item-det mb-4"> 
+    <h3 className>{router.query.name.charAt(0).toUpperCase() + router.query.name.slice(1).toLowerCase()}</h3>
+    <ul className="d-flex"> 
+    <li className="me-5"><Link href="innerlistings" className="icons">
+    <i class="bx bx-building-house mx-1 text-brand"></i> Real Estate</Link></li> 
+    <li className="me-5"><a href="#" className="icons"><i className="bx bx-location-plus mx-1 text-brand" /> Kovai - SIDCO</a></li>
+    <li className="me-5"><a href="#" className="icons"><i className="bx bx-time mx-1 text-brand" /> 5 hours ago</a></li>
+    </ul>
+    </div>
+    <div className="position-relative">
+        <div class="arrow-ribbon2 bg-primary"> Rs. 5000</div>
+    <Image alt="House Image" src={houseImage} />
+    </div>
+     </div> </div> 
+    
+    <div className="card mb-3"> 
+    <div className="card-header">
+     <h3 className="card-title">Description</h3>
+      </div> 
+      
+      <div className="card-body"> 
+      <div className="mb-4"> 
+      <div>Kilaku Vasal, 40 feet Road, Coimabatore, SIDCO</div>
+      
+    </div> <h4 className="mb-4">Specifications</h4> 
+    <div className="row"> 
+    <div className="col-xl-6 col-md-12"> 
+    <ul className="list-unstyled widget-spec mb-0"> 
+    <li className> <i class="bx bx-bed mx-1 text-brand"></i> 2 BedRooms </li> 
+    <li className> <i class="bx bx-bath mx-1 text-brand"></i> 2 BathRooms </li> 
+   
+    </ul> 
+    </div> 
+    
+    <div className="col-xl-6 col-md-12"> 
+    <ul className="list-unstyled widget-spec mb-0"> 
+    <li className> <i className="bx bx-car mx-1 text-brand"></i> 2 Car Parking </li> 
+   <li className> <i className="bx bx-directions mx-1 text-brand"></i> Kilaku Vasal </li>
+    </ul> 
+    </div> 
+
+    
+
+    </div>
+    <hr/>
+<div> <h3>Posted in</h3>
+<div> SIDCO, Coimabatore</div>
+{
+            router.query.uri==="automob" ? 
+            <div>
+            <p>Contact Number : 
+              <span>
+                {logged  ? <span style={{fontWeight:"bolder"}}>{automobilefeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
+               document.getElementById("hideshow").style.display = "flex" 
+                }} style={{color:"skyblue"}}> Show number</a> }
+             </span>
+            </p>   
+          </div>: null
+          }
+           {
+            router.query.uri==="jobs" ? 
+            <div>
+            <p>Contact Number : 
+              <span className="btn mx-2 btn-outline-dark ">
+                {logged  ? <span style={{fontWeight:"bolder"}}> {jobsfeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
+               document.getElementById("hideshow").style.display = "flex" 
+                }} style={{color:"skyblue"}}> Show number</a> }
+             </span>
+            </p>   
+          </div>: null
+          }
+         
+{/* <div>Contact Number <span className="btn mx-2 btn-outline-dark ">96396598654</span></div> */}
+</div>
+     </div> 
+    
+    <div className="card-footer"> <div className="icons mx-1"> <Link href="#" className="btn btn-info">
+    <i className="bx bx-share-alt mx-1"></i> Share Ad</Link> 
+    
+    <Link href="#" className="btn btn-danger mx-1 " data-bs-toggle="modal" data-bs-target="#report">
+    <i className="bx bx-bug mx-1"></i> Report Abuse</Link> 
+    </div> </div> </div>
         <div className="rui-3edbr Fy4_1" id="hideshow">
           <div className="ZspKa">
             <span className="-_djW" data-aut-id="btnClose">
@@ -301,16 +384,8 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
           {/* <Detailcard></Detailcard> */}
          <div>
      
-          DetailsPage for {router.query.uri} {router.query.name}
-          <div>
-            <p>Contact Number : 
-              <span>
-                {logged  ? <span style={{fontWeight:"bolder"}}>{automobilefeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
-               document.getElementById("hideshow").style.display = "flex" 
-                }} style={{color:"skyblue"}}> Show number</a> }
-             </span>
-        </p>   
-      </div>  
+          {/* DetailsPage for {router.query.uri} {router.query.name} */}
+          
     </div>
     </div>
     <div className="col-xl-3 col-lg-4 col-md-12"> 
@@ -338,17 +413,35 @@ export async function getServerSideProps(context)
         __typename
         ... on Jobs {
           id
-          jobsFeatures {
+          jobfeatures {
             address
-            computerClass
+            alternateContanctNumber
+            city
             contactNumber
+            description
+            jobPosition
+            location
+            salaryFrom
+            salaryTo
           }
+          uri
+          title
+          date
         }
-         ... on Service {
+        ... on Service {
           id
-          serviceFeatures {
-          fieldGroupName
-         }
+          servicefeatures {
+            address
+            alternateContactNumber
+            contactNumber
+            description
+            location
+            price
+            sqft
+          }
+          title
+          uri
+        
      }
      ... on Automob {
       id
@@ -375,7 +468,7 @@ export async function getServerSideProps(context)
     props :
     {
       categorydetail : data.nodeByUri,
-      jobsfeatures : data.nodeByUri.jobsFeatures  || null,
+      jobsfeatures : data.nodeByUri.jobfeatures  || null,
       automobilefeatures : data.nodeByUri.automobfeatures || null,
     }
   }

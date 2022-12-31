@@ -17,11 +17,8 @@ import Categories from './Categories';
 import Header from './Components/Header';
 
 
-export default function Home({ jobsdata,automobilesdata,servicesdata }) {
-  console.log(jobsdata.allJobs.nodes);
+export default function Home({ jobsdata,jobsfeatures,automobilesdata,servicesdata }) {
   console.log(automobilesdata);
-  const str = jobsdata.allJobs.nodes;
-  console.log(str);
   return (
     <div className={styles.container}>
 
@@ -29,7 +26,7 @@ export default function Home({ jobsdata,automobilesdata,servicesdata }) {
      <Section1></Section1>
      <Browsectg></Browsectg>  
      <div className='displayallcards'>
-        <AllCtegoriescards allcategorydata = {jobsdata} amdata={automobilesdata} servicedata={servicesdata}/>
+        <AllCtegoriescards alljobsdata = {jobsdata} jobfeature = {jobsfeatures} amdata={automobilesdata} servicedata={servicesdata}/>
       </div>    
       </Format>
       {/* <Head>
@@ -61,30 +58,20 @@ export async function getStaticProps() {
       query NewQuery {
         allJobs {
           nodes {
-            jobsFeatures {
+            jobfeatures {
               address
-              alternateContactNumber
-              computerClass
+              alternateContanctNumber
+              city
               contactNumber
-              courseDetails
-              delivery
-              distributorsWanted
-              driver
-              fieldGroupName
-              homeCare
-              itCandidates
-              listOfPosition
+              description
+              jobPosition
               location
-              qualification
-              salesMarketing
-              tailorCourse
-              tailoringVacancy
+              salaryFrom
+              salaryTo
             }
             title
-            jobsId
-            date
-            blocksJSON
             uri
+            date
           }
         }
         allAutomob {
@@ -102,17 +89,24 @@ export async function getStaticProps() {
               location
             }
             uri
+            date
             title
           }
         }
         allService {
           nodes {
-            date
-            title
-            uri
-            serviceFeatures {
+            servicefeatures {
+              address
+              contactNumber
+              description
+              location
+              price
+              sqft
+              alternateContactNumber
               fieldGroupName
             }
+            title
+            uri
           }
         }
       }
@@ -121,9 +115,10 @@ export async function getStaticProps() {
   console.log("h",data.allAutomob,"d",data.allService);
   return {
     props: {
-      jobsdata: data,
-      automobilesdata: data.allAutomob,
-      servicesdata: data.allService,
+      jobsdata: data.allJobs.nodes,
+      jobsfeatures: data.allJobs.nodes.jobfeatures || null,
+      automobilesdata: data.allAutomob.nodes,
+      servicesdata: data.allService.nodes,
     }
   }
 

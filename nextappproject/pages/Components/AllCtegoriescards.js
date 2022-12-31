@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link';
+import dummyImage from '/public/img/dummy.png';
+import Image from 'next/image';
 
 
-export default function AllCtegoriescards({allcategorydata,amdata,servicedata}) {
+
+export default function AllCtegoriescards({alljobsdata,jobfeature,amdata,servicedata}) {
 
   const router = useRouter();
 
   console.log(router);
 
-    const str = allcategorydata.allJobs.nodes;
+    // const jobdata = alljobsdata.nodes;
 
-    const automobiledata = amdata.nodes;
+    // const automobiledata = amdata.nodes;
 
-    const servicesdata = servicedata.nodes;
+    // const servicesdata = servicedata.nodes;
    
-    console.log(servicesdata);
+    // console.log(servicesdata);
 
-   let [jobsdata,setJobsdata] = useState(str);
+   let [jobsdata,setJobsdata] = useState(alljobsdata);
 
-   let [automobilesdata,setAutomobilesdata] = useState(automobiledata);
+   let [automobilesdata,setAutomobilesdata] = useState(amdata);
 
-   let [servicesdatas,setServicesdata] = useState(servicesdata);
+   let [servicesdatas,setServicesdata] = useState(servicedata);
 
    let [allcategorydatas,setAllcategorydatas] = useState([]);
 
@@ -52,30 +55,55 @@ export default function AllCtegoriescards({allcategorydata,amdata,servicedata}) 
                     return (
                         <div class="col-md-3 col-6" key={ind}>
                           <article class="blog-post">
-                            <img alt="jobimg" src="https://apollo-singapore.akamaized.net/v1/files/6u4rj8ixy3c31-IN/image;s=300x600;q=60" />
-                            <a href={`${ele.uri}`} class="tag" style={{textTransform:"uppercase",marginLeft:"30px"}}><i>{ele.title}</i></a>
+                          <a href={`${ele.uri}`}>
+                            <Image alt="jobimg" src={dummyImage} />
+                            <small>{ele.date}</small>
                             <div class="content">
-                              <p>Qualification : <span style={{fontWeight:"bold"}}>{ele.jobsFeatures.qualification}</span></p>
-                              <p>Location : {ele.jobsFeatures.location}</p>
+                            <h5>{ele.title}</h5>
+                              {/* <p>Qualification : <b style={{fontWeight:"bold"}}>{ele.jobsFeatures.qualification}</b></p> */}
+                              <p>Location : {ele.jobfeatures.location}</p>
                               <span style={{fontWeight:"bold"}}>Jobs</span>
-                              <span style={{fontWeight:"bold"}} class="text-muted">{ele.date}</span>
+                              {/* <span style={{fontWeight:"bold"}} class="text-muted">{ele.date}</span> */}
                             </div>
+                            </a>
                           </article>
                         </div>
                       )
                 }
-                else
+                else if(ele.__typename==="Automob")
                 {
                     return (
-                        <div class="col-md-3 col-6" key={ind}>
-                          <article class="blog-post">
-                            <img alt="jobimg" src="https://apollo-singapore.akamaized.net/v1/files/6u4rj8ixy3c31-IN/image;s=300x600;q=60" />
-                            <a href={`${ele.uri}`} class="tag" style={{textTransform:"uppercase",marginLeft:"30px"}}><i>{ele.title}</i></a>
-                            <div class="content">
-                              <span class="text-muted">{ele.date}</span>
-                            </div>
-                          </article>
+                      <div class="col-md-3 col-6" key={ind}>
+                      <article class="blog-post">
+                      <a href={`${ele.uri}`}>
+                        <Image alt="jobimg" src={dummyImage} />
+                        <small>{ele.date}</small>
+                        <div class="content">
+                        <h5>{ele.title}</h5>
+                          <p>Location : {ele.automobfeatures.location}</p>
+                          <span style={{fontWeight:"bold"}}>Automobiles</span>
                         </div>
+                        </a>
+                      </article>
+                    </div>
+                      )
+                }
+                else if(ele.__typename==="Service")
+                {
+                    return (
+                      <div class="col-md-3 col-6" key={ind}>
+                      <article class="blog-post">
+                      <a href={`${ele.uri}`}>
+                        <Image alt="jobimg" src={dummyImage} />
+                        <small>{ele.date}</small>
+                        <div class="content">
+                        <h5>{ele.title}</h5>
+                          {/* <p>Location : {ele.automobfeatures.location}</p> */}
+                          <span style={{fontWeight:"bold"}}>Services</span>
+                        </div>
+                        </a>
+                      </article>
+                    </div>
                       )
                 }
                 

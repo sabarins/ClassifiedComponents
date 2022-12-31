@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import client from "../../client";
 
 
-
 export default function filterproperty({ subcategory }) {
 
   console.log(subcategory);
@@ -31,7 +30,7 @@ export default function filterproperty({ subcategory }) {
     else if (getcategoryname === "jobs") {
       setJobs(true);
     }
-  })
+  },[])
 
   console.log(getcategoryname);
 
@@ -54,7 +53,7 @@ export default function filterproperty({ subcategory }) {
         <div className="accordion-item">
           <h2 className="accordion-header" id="panelsStayOpen-headingOne">
             <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-              <i class="bx bx-buildings mx-1 text-brand"></i> Properties
+              <i class="bx bx-buildings mx-1 text-brand"></i> {router.query.category[0].charAt(0).toUpperCase() + router.query.category[0].slice(1).toLowerCase()}
             </button>
           </h2>
           <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
@@ -62,7 +61,7 @@ export default function filterproperty({ subcategory }) {
               <div className="filter-product-checkboxs">
 
                 {
-                  automobiles ?
+                  router.query.category[0] ?
                     <div>
                       {
                         subcategory.map((ele, ind) => {
@@ -71,18 +70,15 @@ export default function filterproperty({ subcategory }) {
                             <div>
                               {
                                 ele.categories.nodes.map((e) => {
-                                  var arr = [...e.name];
-                                  var arr2 = [];
-                                  console.log(arr2.push(e.name));
-                                  console.log(arr2.length);
+                                  
+                                console.log(e.name)
                                   return (
                                     <div>
-                                      <Link href="innerlistings" className="text-dark">
+                                      <a href={"/"+`${e.name}`}  className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
-                                          <i className="bx bx-minus mx-1" /> uniqueChars <span className="label label-secondary float-end">14</span>
+                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
-                                      </Link>
-
+                                      </a>
                                     </div>
                                   )
 
@@ -94,40 +90,7 @@ export default function filterproperty({ subcategory }) {
                       }
                     </div> : null
                 }
-                {
-                  jobs ?
-                    <div>
-                      <Link href="/astrology/teaching-class/" className="text-dark">
-                        <label className="custom-control form-checkbox mb-3">
-                          <i className="bx bx-minus mx-1" /> IT Candidates  <span className="label label-secondary float-end">14</span>
-                        </label>
-                      </Link>
-
-                      <Link href="innerlistings" className="text-dark">
-                        <label className="custom-control form-checkbox mb-3">
-                          <i className="bx bx-minus mx-1" /> Operators & Technicians <span className="label label-secondary float-end">14</span>
-                        </label>
-                      </Link>
-
-                    </div> : null
-                }
-                {
-                  service ?
-                    <div>
-                      <Link href="/astrology/teaching-class/" className="text-dark">
-                        <label className="custom-control form-checkbox mb-3">
-                          <i className="bx bx-minus mx-1" /> Electronics & Computer  <span className="label label-secondary float-end">14</span>
-                        </label>
-                      </Link>
-
-                      <Link href="innerlistings" className="text-dark">
-                        <label className="custom-control form-checkbox mb-3">
-                          <i className="bx bx-minus mx-1" /> Other Services <span className="label label-secondary float-end">14</span>
-                        </label>
-                      </Link>
-
-                    </div> : null
-                }
+                
 
 
               </div>
@@ -162,8 +125,6 @@ export default function filterproperty({ subcategory }) {
                 <input type="number" className="form-control" placeholder="Max" aria-label="Max" />
                 <button className="btn border-0 btn-sm btn-brand btn-outline-secondary" type="button" id="button-addon2">Button</button>
               </div>
-
-
             </div>
           </div>
         </div>

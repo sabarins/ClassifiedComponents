@@ -440,6 +440,7 @@ text-align: center;}
 
 .blog-post .content {
     padding:8px 16px;
+    margin-bottom: 15px;
 }
 
 .blog-post span {
@@ -454,9 +455,13 @@ text-align: center;}
 }
 
 .blog-post h5 {
-    margin-top: 12px;
+    margin-top: 0px;
     margin-bottom: 12px;
 }
+.blog-post a:hover h5 { color:  var(--brand);}
+.blog-post a p { color:#333 !important}
+.blog-post a:hover p { color:#333 !important}
+
 .blog-post p{ margin-bottom: 0;}
 
 .blog-post small {
