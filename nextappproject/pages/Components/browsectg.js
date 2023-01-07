@@ -134,7 +134,7 @@ export default function browsectg() {
       <div className="item">
          <div className="mb-0"> 
             <div className="cat-item text-center">
-            <Link href="/automob" className="dropdown-item"><div className="cat-img">
+            <Link href="/automobile" className="dropdown-item"><div className="cat-img">
               <Image
         alt="Automobiles"
         src={automobilesIcon}        

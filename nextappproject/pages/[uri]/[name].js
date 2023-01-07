@@ -17,10 +17,11 @@ import houseImage from '/public/img/housesale.jpg';
 
 
 
-export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatures}) {
+export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatures,astrologyfeatures,electrandapplfeatures
+,servicefeatures,propertyfeatures}) {
 
   // console.log(categorydetail,automobilefeatures,jobsfeatures);
-
+console.log(categorydetail);
 
     let router = useRouter();
 
@@ -133,17 +134,49 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
     // }
   return (
       <Format>
-      <Bredcrumb></Bredcrumb>
+      <Bredcrumb allcategorydata = {categorydetail}></Bredcrumb>
      
     <div className="container">
       <div className="row">
         <div className="col-xl-9 col-lg-8 col-md-12">
         <div className="card overflow-hidden mt-3 mb-3"> <div className="ribbon ribbon-top-right text-danger"><span className="bg-primary">featured</span></div> <div className="card-body h-100 boot-slider"> <div className="item-det mb-4"> 
-    <h3 className>{router.query.name.charAt(0).toUpperCase() + router.query.name.slice(1).toLowerCase()}</h3>
+    <h3 className>{categorydetail.title}</h3>
     <ul className="d-flex"> 
     <li className="me-5"><Link href="innerlistings" className="icons">
     <i class="bx bx-building-house mx-1 text-brand"></i> Real Estate</Link></li> 
-    <li className="me-5"><a href="#" className="icons"><i className="bx bx-location-plus mx-1 text-brand" /> Kovai - SIDCO</a></li>
+    <li className="me-5"><a href="#" className="icons"><i className="bx bx-location-plus mx-1 text-brand" />
+    {
+      router.query.uri==="jobs" ? 
+      <span>{jobsfeatures.location}</span>
+      :null
+    }
+    {
+      router.query.uri==="automobile" ? 
+        <span>{automobilefeatures.location}</span>
+        :null
+    } 
+    {
+      router.query.uri==="service" ? 
+      <span>{servicefeatures.location}</span>
+      :null
+    }
+    {
+      router.query.uri==="electronicandapplian" ? 
+      <span>{electrandapplfeatures.location}</span>
+      :null
+    }
+    {
+      router.query.uri==="astrology" ? 
+      <span>{astrologyfeatures.location}</span>
+      :null
+    }
+    {
+      router.query.uri==="properties" ? 
+      <span>{propertyfeatures.location}</span>
+      :null
+    }
+
+    </a></li>
     <li className="me-5"><a href="#" className="icons"><i className="bx bx-time mx-1 text-brand" /> 5 hours ago</a></li>
     </ul>
     </div>
@@ -160,7 +193,45 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
       
       <div className="card-body"> 
       <div className="mb-4"> 
-      <div>Kilaku Vasal, 40 feet Road, Coimabatore, SIDCO</div>
+      <div>
+        {
+          router.query.uri==="jobs" ? 
+          <div>
+            <p>{jobsfeatures.description}</p>
+          </div> : null
+        }
+        {
+          router.query.uri==="automobile" ? 
+          <div>
+            <p>{automobilefeatures.description}</p>
+          </div> : null
+        }
+        {
+          router.query.uri==="service" ? 
+          <div>
+            <p>{servicefeatures.description}</p>
+          </div> : null
+        }
+        {
+      router.query.uri==="electronicandapplian" ? 
+    <div>
+      <p>{electrandapplfeatures.description}</p>
+    </div>:null
+    }
+    {
+      router.query.uri==="astrology" ? 
+    <div>
+      <p>{astrologyfeatures.description}</p>
+    </div>:null
+    }
+    {
+      router.query.uri==="properties" ? 
+    <div>
+      <p>{propertyfeatures.description}</p>
+    </div>:null
+    }
+       
+      </div>
       
     </div> <h4 className="mb-4">Specifications</h4> 
     <div className="row"> 
@@ -183,13 +254,16 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
 
     </div>
     <hr/>
-<div> <h3>Posted in</h3>
-<div> SIDCO, Coimabatore</div>
-{
-            router.query.uri==="automob" ? 
+    <div>
+       <h3>Posted in</h3>
+
+          {
+            router.query.uri==="automobile" ? 
             <div>
+              <p>{automobilefeatures.city} {automobilefeatures.location}</p>
+
             <p>Contact Number : 
-              <span>
+              <span className="btn mx-2 btn-outline-dark ">
                 {logged  ? <span style={{fontWeight:"bolder"}}>{automobilefeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
                document.getElementById("hideshow").style.display = "flex" 
                 }} style={{color:"skyblue"}}> Show number</a> }
@@ -200,6 +274,7 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
            {
             router.query.uri==="jobs" ? 
             <div>
+              <p>{jobsfeatures.city} {jobsfeatures.location}</p>
             <p>Contact Number : 
               <span className="btn mx-2 btn-outline-dark ">
                 {logged  ? <span style={{fontWeight:"bolder"}}> {jobsfeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
@@ -209,7 +284,61 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
             </p>   
           </div>: null
           }
+          {
+            router.query.uri==="astrology" ? 
+            <div>
+              <p>{astrologyfeatures.city} {astrologyfeatures.location}</p>
+            <p>Contact Number : 
+              <span className="btn mx-2 btn-outline-dark ">
+                {logged  ? <span style={{fontWeight:"bolder"}}> {astrologyfeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
+               document.getElementById("hideshow").style.display = "flex" 
+                }} style={{color:"skyblue"}}> Show number</a> }
+             </span>
+            </p>   
+          </div>: null
+          }
+           {
+            router.query.uri==="electronicandapplian" ? 
+            <div>
+              <p>{electrandapplfeatures.city} {electrandapplfeatures.location}</p>
+            <p>Contact Number : 
+              <span className="btn mx-2 btn-outline-dark ">
+                {logged  ? <span style={{fontWeight:"bolder"}}> {electrandapplfeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
+               document.getElementById("hideshow").style.display = "flex" 
+                }} style={{color:"skyblue"}}> Show number</a> }
+             </span>
+            </p>   
+          </div>: null
+          }
+          {
+            router.query.uri==="properties" ? 
+            <div>
+              <p>{propertyfeatures.city} {propertyfeatures.location}</p>
+            <p>Contact Number : 
+              <span className="btn mx-2 btn-outline-dark ">
+                {logged  ? <span style={{fontWeight:"bolder"}}> {propertyfeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
+               document.getElementById("hideshow").style.display = "flex" 
+                }} style={{color:"skyblue"}}> Show number</a> }
+             </span>
+            </p>   
+          </div>: null
+          }
+          {
+            router.query.uri==="service" ? 
+            <div>
+              <p>{servicefeatures.city} {servicefeatures.location}</p>
+            <p>Contact Number : 
+              <span className="btn mx-2 btn-outline-dark ">
+                {logged  ? <span style={{fontWeight:"bolder"}}> {servicefeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
+               document.getElementById("hideshow").style.display = "flex" 
+                }} style={{color:"skyblue"}}> Show number</a> }
+             </span>
+            </p>   
+          </div>: null
+          }
+          
          
+
 {/* <div>Contact Number <span className="btn mx-2 btn-outline-dark ">96396598654</span></div> */}
 </div>
      </div> 
@@ -411,6 +540,53 @@ export async function getServerSideProps(context)
       query NewQuery($uri: String!) {
       nodeByUri(uri: $uri) {
         __typename
+        ... on Astrology {
+          id
+          astrofeatures {
+            address
+            alternateContactNumber
+            contactNumber
+            description
+            fieldGroupName
+            location
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+          title
+          uri
+          date
+        }
+        ... on Automobile {
+          id
+          automobfeatures {
+            address
+            alternateContactNumber
+            contactNumber
+            description
+            location
+            fieldGroupName
+          }
+          date
+          title
+          uri
+        }
+        ... on ElectronicsAndAppliances {
+          id
+          eleandappfeatures {
+            address
+            alternateContactNumber
+            contactNumber
+            description
+            fieldGroupName
+            location
+          }
+          date
+          title
+          uri
+        }
         ... on Jobs {
           id
           jobfeatures {
@@ -419,44 +595,55 @@ export async function getServerSideProps(context)
             city
             contactNumber
             description
+            fieldGroupName
             jobPosition
             location
             salaryFrom
             salaryTo
           }
-          uri
           title
+          uri
           date
         }
-        ... on Service {
+        ... on Properties {
           id
+          propertyfeatures {
+            acre
+            address
+            alternateContactNumber
+            cent
+            city
+            contactNumber
+            description
+            fieldGroupName
+            location
+            price
+            priceTo
+            sqft
+          }
+          title
+          uri
+          date
+        }
+        ... on Services {
+          id
+          date
           servicefeatures {
             address
             alternateContactNumber
             contactNumber
             description
+            fieldGroupName
             location
             price
             sqft
           }
           title
           uri
-        
-     }
-     ... on Automob {
-      id
-      title
-      uri
-      automobfeatures {
-        address
-        alternateContactNumber
-        contactNumber
-        description
-        location
-      }
-    }
+        }
     uri
   }
+  
 }
       `,
       variables: {
@@ -468,8 +655,12 @@ export async function getServerSideProps(context)
     props :
     {
       categorydetail : data.nodeByUri,
+      astrologyfeatures : data.nodeByUri.astrofeatures || null,
       jobsfeatures : data.nodeByUri.jobfeatures  || null,
       automobilefeatures : data.nodeByUri.automobfeatures || null,
+      electrandapplfeatures : data.nodeByUri.eleandappfeatures || null,
+      servicefeatures : data.nodeByUri.servicefeatures || null,
+      propertyfeatures : data.nodeByUri.propertyfeatures || null
     }
   }
 }

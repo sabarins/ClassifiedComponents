@@ -7,7 +7,7 @@ export default function Logout() {
   return (
     <div>
         <div id="hidelogoutbtn">
-        <p style={{fontWeight:"bolder",margin:"30px 0px 0px 10px"}}>Welcome {localStorage.getItem("name")}!</p>
+          <p style={{fontWeight:"bolder",margin:"30px 0px 0px 10px"}}>Welcome {localStorage.getItem("name")}!</p>
           <button
             onClick={(e) => {
               localStorage.removeItem("name");

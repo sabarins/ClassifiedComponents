@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import Filterproperty from './Components/filterproperty';
 import dummyImage from '../public/img/dummy.png';
 import Image from 'next/image';
@@ -8,8 +8,13 @@ import Image from 'next/image';
 
 
 
-export default function subcategory({ subdata }) {
+export default function subcategory({ subdata,subdata2 }) {
 
+    let [automobiles, setAutomobiles] = useState(false);
+
+    let [service, setService] = useState(false);
+    console.log(subdata);
+    
     const router = useRouter();
     return (
         <div>

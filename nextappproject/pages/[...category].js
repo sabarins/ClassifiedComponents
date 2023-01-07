@@ -13,11 +13,14 @@ import Link from "next/link"
 import Subcategory from "./subcategory"
 import dummyImage from '../public/img/dummy.png';
 import Image from 'next/image';
+import Search from "./Components/Search"
 
-export default function Innerlistings({ jobsdata, automobilesdata, servicesdata,user,automobilecategories,subcategorydata }) {
+
+export default function Innerlistings({ allcategorydata,subcategorydata2,jobsdata, astrologydata,propertiesdata,automobilesdata, servicesdata,user,automobilecategories,subcategorydata,electandappl }) {
 
   console.log(user);
   console.log(subcategorydata);
+  console.log(allcategorydata);
 
   const jobdata = jobsdata.nodes;
 
@@ -36,7 +39,9 @@ export default function Innerlistings({ jobsdata, automobilesdata, servicesdata,
   const [service, setService] = useState(false);
   const [jobs, setJobs] = useState(false);
   const [automobiles, setAutomobiles] = useState(false);
-
+  const [elect,setElect] = useState(false);
+  const [astrology,setAstrology] = useState(false);
+  const [properties,setProperties] = useState(false);
 
 
   let [categoryname, setCategoryname] = useState(getcategoryname);
@@ -50,24 +55,46 @@ export default function Innerlistings({ jobsdata, automobilesdata, servicesdata,
     else if (categoryname === "jobs") {
       setJobs(true);
     }
-    else if (categoryname === "automob") {
+    else if (categoryname === "automobile") {
       setAutomobiles(true);
+    }
+    else if(categoryname === "electronicandapplian")
+    {
+      setElect(true);
+    }
+    else if(categoryname === "astrology")
+    {
+      setAstrology(true);
+    }
+    else if(categoryname === "properties")
+    {
+      setProperties(true);
     }
     if(router.query.category[0]==="motorcycles")
     {
       setMotorcycles(true);
     }
+
+
   }, []);
 
-  console.log(router.query.category)
+  console.log(router.query.uri);
+
+
+  let [getsubcategoryname,setGetsubcategoryname] = useState("");
+
+  console.log(getsubcategoryname);
+
+  console.log(servicesdata.nodes && automobilesdata.nodes);
+
 
   return (
     <Format> 
-    <Bredcrumb></Bredcrumb>
+    <Bredcrumb sub={getsubcategoryname} allcategory={allcategorydata}></Bredcrumb>
     <div className="container">
-    <div className="row">
-    <div className="col-xl-9 col-lg-8 col-md-12">
-            <Subcategory subdata={subcategorydata} />
+      <div className="row">
+        <div className="col-xl-9 col-lg-8 col-md-12">
+            <Subcategory subdata={subcategorydata} subdata2={subcategorydata2} />
           {service ?
               <div className='row'>
                 {
@@ -110,8 +137,15 @@ export default function Innerlistings({ jobsdata, automobilesdata, servicesdata,
                             <h5>{ele.title}</h5>
                               {/* <p>Qualification : <b style={{fontWeight:"bold"}}>{ele.jobsFeatures.qualification}</b></p> */}
                               <p>Location : {ele.jobfeatures.location}</p>
-                              <span style={{fontWeight:"bold"}}>Jobs</span>
-                              {/* <span style={{fontWeight:"bold"}} class="text-muted">{ele.date}</span> */}
+                              {/* {
+                                ele.categories.nodes.map((e)=>
+                                {
+                                  return(
+                                    <span>{e.name}</span>
+                                  )
+                                })
+
+                             } */}
                             </div>
                             </a>
                           </article>
@@ -130,19 +164,24 @@ export default function Innerlistings({ jobsdata, automobilesdata, servicesdata,
                 <div className='row position-relative mt-3'>
                   {
                     automobiledata.map((ele, ind) => {
+                      console.log(ele)
                       return (
                         <div className="col-md-4 col-6" key={ind}>
                           <article className="blog-post">
-                            <a href={`${ele.uri}`}>
+                            <Link href={`${ele.uri}`} onClick={()=>{
+                              setGetsubcategoryname();
+                            }}
+                            >
                             <Image alt="jobimg" src={dummyImage} />
                             <small>{ele.date}</small>
                             <div className="content">
                               <h5>{ele.title}</h5>
-                              {/* <p>Qualification : <span style={{ fontWeight: "bold" }}>{ele.jobsFeatures.qualification}</span></p> */}
                              <p className="mb-3">Location : {ele.automobfeatures.location}</p>
                              {
                                 ele.categories.nodes.map((e)=>
                                 {
+                                  console.log(e);
+                                  
                                   return(
                                     <span>{e.name}</span>
                                   )
@@ -150,7 +189,7 @@ export default function Innerlistings({ jobsdata, automobilesdata, servicesdata,
 
                              }
                             </div>
-                            </a>
+                            </Link>
                           </article>
                         </div>
                       )
@@ -158,14 +197,140 @@ export default function Innerlistings({ jobsdata, automobilesdata, servicesdata,
                   }
                 </div>
               </div>
-              : null}
+              : null
+            }
+            {
+              elect ?
+              <div>
+                <div className='row position-relative mt-3'>
+                  {
+                    electandappl.map((ele, ind) => {
+                      console.log(ele)
+                      return (
+                        <div className="col-md-4 col-6" key={ind}>
+                          <article className="blog-post">
+                            <Link href={`${ele.uri}`} onClick={()=>{
+                              setGetsubcategoryname();
+                            }}
+                            >
+                            <Image alt="jobimg" src={dummyImage} />
+                            <small>{ele.date}</small>
+                            <div className="content">
+                              <h5>{ele.title}</h5>
+                             <p className="mb-3">Location : {ele.eleandappfeatures.location}</p>
+                             {/* {
+                                ele.categories.nodes.map((e)=>
+                                {
+                                  console.log(e);
+                                  
+                                  return(
+                                    <span>{e.name}</span>
+                                  )
+                                })
+
+                             } */}
+                            </div>
+                            </Link>
+                          </article>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+              : null
+            }
+            {
+              astrology ?
+              <div>
+                <div className='row position-relative mt-3'>
+                  {
+                    astrologydata.map((ele, ind) => {
+                      console.log(ele)
+                      return (
+                        <div className="col-md-4 col-6" key={ind}>
+                          <article className="blog-post">
+                            <Link href={`${ele.uri}`} onClick={()=>{
+                              setGetsubcategoryname();
+                            }}
+                            >
+                            <Image alt="jobimg" src={dummyImage} />
+                            <small>{ele.date}</small>
+                            <div className="content">
+                              <h5>{ele.title}</h5>
+                             {/* <p className="mb-3">Location : {ele.astrofeatures.location}</p> */}
+                             {/* {
+                                ele.categories.nodes.map((e)=>
+                                {
+                                  console.log(e);
+                                  
+                                  return(
+                                    <span>{e.name}</span>
+                                  )
+                                })
+
+                             } */}
+                            </div>
+                            </Link>
+                          </article>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+              : null
+            }
+            {
+              properties ?
+              <div>
+                <div className='row position-relative mt-3'>
+                  {
+                    propertiesdata.map((ele, ind) => {
+                      console.log(ele)
+                      return (
+                        <div className="col-md-4 col-6" key={ind}>
+                          <article className="blog-post">
+                            <Link href={`${ele.uri}`} onClick={()=>{
+                              setGetsubcategoryname();
+                            }}
+                            >
+                            <Image alt="jobimg" src={dummyImage} />
+                            <small>{ele.date}</small>
+                            <div className="content">
+                              <h5>{ele.title}</h5>
+                             <p className="mb-3">Location : {ele.propertyfeatures.location}</p>
+                             {/* {
+                                ele.categories.nodes.map((e)=>
+                                {
+                                  console.log(e);
+                                  
+                                  return(
+                                    <span>{e.name}</span>
+                                  )
+                                })
+
+                             } */}
+                            </div>
+                            </Link>
+                          </article>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+              : null
+            }
           </div>
 
-       </div>
-    <div className="col-xl-3 col-lg-4 col-md-12"> 
-    <Advtsmall></Advtsmall>
-    <Filterproperty subcategory={automobilesdata.nodes || null}></Filterproperty>
-    </div></div></div>
+      </div>
+      <div className="col-xl-3 col-lg-4 col-md-12"> 
+        <Advtsmall></Advtsmall>
+        <Filterproperty subcategory={allcategorydata}></Filterproperty>
+      </div>
+    </div>
+     </div>
 
    </Format>
   )
@@ -184,49 +349,63 @@ export async function getServerSideProps(context) {
             city
             contactNumber
             description
-            fieldGroupName
             jobPosition
             location
             salaryFrom
             salaryTo
           }
-          title
-          uri
-          date
-        }
-      }
-     allAutomob {
-        nodes {
           categories {
             nodes {
               name
             }
           }
-          automobfeatures {
-            address
-            alternateContactNumber
-            contactNumber
-            description
-            location
-          }
+          title
           uri
           date
-          title
         }
       }
-      automob2: allAutomob(where: {categoryName: "${context.query.category[0]}" }) {
+      automobiles {
         nodes {
           automobfeatures {
             address
             alternateContactNumber
             contactNumber
             description
+            fieldGroupName
             location
           }
-          uri
+          categories {
+            nodes {
+              name
+            }
+          }
           title
+          uri
           slug
-          automobId
+        }
+      }
+      automob2: automobiles(where: {categoryName: "${context.query.category[0]}" }) {
+        nodes {
+          automobfeatures {
+            address
+            alternateContactNumber
+            contactNumber
+            description
+            fieldGroupName
+            location
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+          title
+          uri
+          slug
+        }
+      }
+      services2: allServices(where: {categoryName: ""}) {
+        nodes {
           categories {
             nodes {
               name
@@ -234,20 +413,92 @@ export async function getServerSideProps(context) {
           }
         }
       }
-      allService {
+      allServices {
         nodes {
           servicefeatures {
             address
+            alternateContactNumber
             contactNumber
             description
+            fieldGroupName
             location
             price
             sqft
-            alternateContactNumber
-            fieldGroupName
+          }
+          categories {
+            nodes {
+              name
+            }
           }
           title
           uri
+          date
+        }
+      }
+      allElectronicsAndAppliances {
+        nodes {
+          eleandappfeatures {
+            address
+            alternateContactNumber
+            contactNumber
+            description
+            fieldGroupName
+            location
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+          uri
+          title
+          date
+        }
+      }
+      allProperties {
+        nodes {
+          propertyfeatures {
+            acre
+            address
+            alternateContactNumber
+            cent
+            city
+            contactNumber
+            description
+            fieldGroupName
+            location
+            price
+            priceTo
+            sqft
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+          title
+          uri
+          date
+        }
+      }
+      allAstrology {
+        nodes {
+          astrofeatures {
+            address
+            contactNumber
+            alternateContactNumber
+            description
+            fieldGroupName
+            location
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+          title
+          uri
+          date
         }
       }
       pages {
@@ -261,15 +512,21 @@ export async function getServerSideProps(context) {
     }
     `
   });
+  
   console.log("h", data.automob2, "d", data.allService);
   return {
     props: {
       jobsdata: data.allJobs,
-      automobilesdata: data.allAutomob,
-      automobilecategories:data.allAutomob.nodes,
-      servicesdata: data.allService,
+      automobilesdata: data.automobiles,
+      automobilecategories:data.automobiles.nodes,
+      servicesdata: data.allServices,
+      propertiesdata: data.allProperties.nodes,
+      astrologydata: data.allAstrology.nodes,
+      electandappl: data.allElectronicsAndAppliances.nodes,
       user: data.pages.nodes,
-      subcategorydata: data.automob2.nodes
+      subcategorydata: data.automob2.nodes,
+      subcategorydata2: data.services2.nodes,
+      allcategorydata: data,
     }
   }
 }

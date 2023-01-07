@@ -16,22 +16,22 @@ export default function header() {
           <Link legacyBehavior  href="/"><a className="nav-link" >Home</a></Link>
         </li>
         <li className="nav-item">
-        <Link legacyBehavior  href="/innerlistings"><a className="nav-link" >Properties</a></Link>
+        <a legacyBehavior  href="/properties" className="nav-link">Properties</a>
         </li>
         <li className="nav-item">
-        <Link legacyBehavior href="/innerlistings"><a className="nav-link" >Electronics &amp; Appliances</a></Link>
+        <a legacyBehavior href="/electronicandapplian" className="nav-link">Electronics &amp; Appliances</a>
         </li>
         <li className="nav-item">
         <a legacyBehavior href="/jobs" className="nav-link">Jobs</a>
         </li>
         <li className="nav-item">
-        <Link legacyBehavior href="/innerlistings" ><a className="nav-link" >Astrology</a></Link>
+        <a legacyBehavior href="/astrology" className="nav-link" >Astrology</a>
         </li>
         <li className="nav-item">
         <a legacyBehavior href="/service" className="nav-link">Services</a>
         </li>
         <li className="nav-item">
-        <a legacyBehavior href="/automob" className="nav-link">Automobiles</a>
+        <a legacyBehavior href="/automobile" className="nav-link">Automobiles</a>
         </li>
       </ul>
       <Link legacyBehavior href="#"><a data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-brand ms-lg-3">Post an Advt</a></Link>

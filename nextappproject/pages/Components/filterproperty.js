@@ -12,7 +12,18 @@ export default function filterproperty({ subcategory }) {
 
   const router = useRouter();
 
+  let astrology = subcategory.allAstrology.nodes;
+  let properties = subcategory.allProperties.nodes;
+  let automobiless = subcategory.automobiles.nodes;
+  let services = subcategory.allServices.nodes;
+  console.log(services);
+  let electrandap = subcategory.allElectronicsAndAppliances.nodes;
+  let jobss = subcategory.allJobs.nodes;
+
+
   let getcategoryname = router.query.category[0];
+
+  console.log(getcategoryname);
 
   let [automobiles, setAutomobiles] = useState(false);
 
@@ -20,8 +31,20 @@ export default function filterproperty({ subcategory }) {
 
   let [jobs, setJobs] = useState(false);
 
+  let [property, setProperty] = useState(false);
+
+  let [electroandapp,setElectroandapp] = useState(false);
+
+  let [astrologies,setAstrologies] = useState(false);
+
+
+
+  let [allsubcategoriesdata,setAllsubcategoriesdata] = useState([]);
+
   useEffect(() => {
-    if (getcategoryname === "automob") {
+
+    setAllsubcategoriesdata([...astrology,...properties,...automobiless,...services,...electrandap,...jobss])
+    if (getcategoryname === "automobile") {
       setAutomobiles(true);
     }
     else if (getcategoryname === "service") {
@@ -30,9 +53,22 @@ export default function filterproperty({ subcategory }) {
     else if (getcategoryname === "jobs") {
       setJobs(true);
     }
+    else if(getcategoryname === "electronicandapplian")
+    {
+      setElectroandapp(true);
+    }
+    else if(getcategoryname === "properties")
+    {
+      setProperty(true);
+    }
+    else if(getcategoryname === "astrology")
+    {
+      setAstrologies(true);
+    }
   },[])
 
-  console.log(getcategoryname);
+  console.log(allsubcategoriesdata);
+  console.log(router.query.category[0]);
 
   return (
     <div>
@@ -59,13 +95,12 @@ export default function filterproperty({ subcategory }) {
           <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
             <div className="accordion-body">
               <div className="filter-product-checkboxs">
-
                 {
-                  router.query.category[0] ?
+                  automobiles ?
                     <div>
                       {
-                        subcategory.map((ele, ind) => {
-                          console.log(ele.categories.nodes);
+                        automobiless.map((ele, ind) => {
+                          console.log(ele.categories.nodes.slice(1,2));
                           return (
                             <div>
                               {
@@ -88,11 +123,164 @@ export default function filterproperty({ subcategory }) {
                           )
                         })
                       }
+                      
+                    </div> : null
+                }
+                {
+                  service ?
+                    <div>
+                      {
+                        services.map((ele, ind) => {
+                          console.log(ele.categories.nodes.slice(1,2));
+                          return (
+                            <div>
+                              {
+                                ele.categories.nodes.map((e) => {
+                                  
+                                console.log(e.name)
+                                  return (
+                                    <div>
+                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                        <label className="custom-control form-checkbox mb-3">
+                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
+                                        </label>
+                                      </a>
+                                    </div>
+                                  )
+                                })
+                              }
+                            </div>
+                          )
+                        })
+                      }
+                      
+                    </div> : null
+                }
+                {
+                  jobs ?
+                    <div>
+                      {
+                        jobss.map((ele, ind) => {
+                          console.log(ele.categories.nodes.slice(1,2));
+                          return (
+                            <div>
+                              {
+                                ele.categories.nodes.map((e) => {
+                                  
+                                console.log(e.name)
+                                  return (
+                                    <div>
+                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                        <label className="custom-control form-checkbox mb-3">
+                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
+                                        </label>
+                                      </a>
+                                    </div>
+                                  )
+
+                                })
+                              }
+                            </div>
+                          )
+                        })
+                      }
+                      
+                    </div> : null
+                }
+                {
+                  electroandapp ?
+                    <div>
+                      {
+                        electrandap.map((ele, ind) => {
+                          console.log(ele.categories.nodes.slice(1,2));
+                          return (
+                            <div>
+                              {
+                                ele.categories.nodes.map((e) => {
+                                  
+                                console.log(e.name)
+                                  return (
+                                    <div>
+                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                        <label className="custom-control form-checkbox mb-3">
+                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
+                                        </label>
+                                      </a>
+                                    </div>
+                                  )
+
+                                })
+                              }
+                            </div>
+                          )
+                        })
+                      }
+                      
+                    </div> : null
+                }
+                {
+                  property ?
+                    <div>
+                      {
+                        properties.map((ele, ind) => {
+                          console.log(ele.categories.nodes.slice(1,2));
+                          return (
+                            <div>
+                              {
+                                ele.categories.nodes.map((e) => {
+                                  
+                                console.log(e.name)
+                                  return (
+                                    <div>
+                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                        <label className="custom-control form-checkbox mb-3">
+                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
+                                        </label>
+                                      </a>
+                                    </div>
+                                  )
+
+                                })
+                              }
+                            </div>
+                          )
+                        })
+                      }
+                      
+                    </div> : null
+                }
+                {
+                  astrologies ?
+                    <div>
+                      {
+                        astrology.map((ele, ind) => {
+                          console.log(ele.categories.nodes.slice(1,2));
+                          return (
+                            <div>
+                              {
+                                ele.categories.nodes.map((e) => {
+                                  
+                                console.log(e.name)
+                                  return (
+                                    <div>
+                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                        <label className="custom-control form-checkbox mb-3">
+                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
+                                        </label>
+                                      </a>
+                                    </div>
+                                  )
+
+                                })
+                              }
+                            </div>
+                          )
+                        })
+                      }
+                      
                     </div> : null
                 }
                 
-
-
               </div>
             </div>
           </div>
