@@ -12,6 +12,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
 
   console.log(router);
 
+
   // const jobdata = alljobsdata.nodes;
 
   // const automobiledata = amdata.nodes;
@@ -71,7 +72,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}`}>
+                      <a href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">
@@ -90,7 +91,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}`}>
+                      <a href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">
@@ -107,7 +108,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}`}>
+                      <a href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">
@@ -123,7 +124,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}`}>
+                      <a href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">
@@ -139,7 +140,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}`}>
+                      <a href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">
@@ -155,7 +156,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}`}>
+                      <a href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">

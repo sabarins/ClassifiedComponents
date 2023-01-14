@@ -20,7 +20,7 @@ export default function SearchInput({ getdata, searchinp }) {
   let [jobsdata, setJobsdata] = useState([]);
   let [electappldata, setElectappldata] = useState([]);
   let [astrologydata, setAstrologydata] = useState([]);
-  let [propertiesdata, setPropertiesdata] = useState([]);
+  let [propertiesdatas, setPropertiesdatas] = useState([]);
   let [servicesdata, setServicesdata] = useState([]);
   let [automobilesdata, setAutomobilesdata] = useState([]);
 
@@ -45,7 +45,7 @@ export default function SearchInput({ getdata, searchinp }) {
       setAstrologydata(getdata.allAstrology.nodes);
     }
     if (getdata.allProperties.nodes.length > 0) {
-      setPropertiesdata(getdata.allProperties.nodes);
+      setPropertiesdatas(getdata.allProperties.nodes); 
     }
     if (getdata.allServices.nodes.length > 0) {
       setServicesdata(getdata.allServices.nodes);
@@ -54,10 +54,10 @@ export default function SearchInput({ getdata, searchinp }) {
       setAutomobilesdata(getdata.automobiles.nodes);
     }
 
-    let searchcpydata = [...jobsdata,...electappldata,...astrologydata,...propertiesdata,...servicesdata,...automobilesdata]
+    let searchcpydata = [...jobsdata,...electappldata,...astrologydata,...propertiesdatas,...servicesdata,...automobilesdata]
     setUsersearcheddata(searchcpydata);
 
-  },[jobsdata,electappldata,astrologydata,propertiesdata,servicesdata,automobilesdata]);
+  },[jobsdata,electappldata,astrologydata,propertiesdatas,servicesdata,automobilesdata]);
 
   console.log(usersearcheddata);
   return (
@@ -67,25 +67,27 @@ export default function SearchInput({ getdata, searchinp }) {
       <div>
         <div class="container">
         <div class="row mt-4">
+        <div className="col-xl-9 col-lg-8 col-md-12">
         {
           usersearcheddata.map((ele,ind)=>
           {
             return(
-              <div class="col-md-3 col-6" key={ind}>
-                    <article class="blog-post">
-                      <a href={`${ele.uri}`}>
+              <div className="col-md-4 col-6" key={ind}>
+                    <article className="blog-post">
+                      <a href={`${ele.uri}/${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
-                        <div class="content">
+                        <div className="content">
                           <h5>{ele.title}</h5>                         
                           <span style={{ fontWeight: "bold" }}>{ele.__typename}</span>
                         </div>
                       </a>
                     </article>
-                  </div>
+              </div>
             )
           })
         }
+        </div>
         <div className="col-xl-3 col-lg-4 col-md-12"> 
           <Advtsmall></Advtsmall>
         </div>
@@ -119,6 +121,7 @@ export async function getServerSideProps(context) {
           }
           title
           uri
+          id
         }
       }
       allJobs(where: {search: $searchinp}) {
@@ -135,6 +138,7 @@ export async function getServerSideProps(context) {
             salaryTo
           }
           title
+          id
           uri
         }
       }
@@ -156,6 +160,7 @@ export async function getServerSideProps(context) {
           }
           title
           uri
+          id
         }
       }
       allServices(where: {search:$searchinp}) {
@@ -171,6 +176,7 @@ export async function getServerSideProps(context) {
           }
           title
           uri
+          id
         }
       }
        allElectronicsAndAppliances(where: {search:$searchinp}) {
@@ -184,6 +190,7 @@ export async function getServerSideProps(context) {
           }
           title
           uri
+          id
         }
       }
        automobiles(where: {search:$searchinp}) {
@@ -197,6 +204,7 @@ export async function getServerSideProps(context) {
             location
           }
           title
+          id
           uri
         }
       }

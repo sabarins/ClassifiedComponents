@@ -6,22 +6,21 @@ import { useEffect, useState } from "react";
 import client from "../../client";
 
 
-export default function filterproperty({ subcategory }) {
+export default function filterproperty({ subcategory, alldata }) {
 
-  console.log(subcategory);
+  console.log(subcategory, alldata);
 
   const router = useRouter();
 
-  let astrology = subcategory.allAstrology.nodes;
-  let properties = subcategory.allProperties.nodes;
-  let automobiless = subcategory.automobiles.nodes;
-  let services = subcategory.allServices.nodes;
-  console.log(services);
-  let electrandap = subcategory.allElectronicsAndAppliances.nodes;
-  let jobss = subcategory.allJobs.nodes;
+  let astrology = alldata.allAstrology.nodes;
+  let properties = alldata.allProperties.nodes;
+  let automobiless = alldata.automobiles.nodes;
+  let services = alldata.allServices.nodes;
+  let electrandap = alldata.allElectronicsAndAppliances.nodes;
+  let jobss = alldata.allJobs.nodes;
 
 
-  let getcategoryname = router.query.category[0];
+  let getcategoryname = router.query.uri;
 
   console.log(getcategoryname);
 
@@ -33,17 +32,19 @@ export default function filterproperty({ subcategory }) {
 
   let [property, setProperty] = useState(false);
 
-  let [electroandapp,setElectroandapp] = useState(false);
+  let [electroandapp, setElectroandapp] = useState(false);
 
-  let [astrologies,setAstrologies] = useState(false);
+  let [astrologies, setAstrologies] = useState(false);
 
 
 
-  let [allsubcategoriesdata,setAllsubcategoriesdata] = useState([]);
+  let [allsubcategoriesdata, setAllsubcategoriesdata] = useState([]);
+
+  console.log(router.query.uri,router.query.name);
 
   useEffect(() => {
 
-    setAllsubcategoriesdata([...astrology,...properties,...automobiless,...services,...electrandap,...jobss])
+    // setAllsubcategoriesdata([...astrology, ...properties, ...automobiless, ...services, ...electrandap, ...jobss])
     if (getcategoryname === "automobile") {
       setAutomobiles(true);
     }
@@ -53,22 +54,19 @@ export default function filterproperty({ subcategory }) {
     else if (getcategoryname === "jobs") {
       setJobs(true);
     }
-    else if(getcategoryname === "electronicandapplian")
-    {
+    else if (getcategoryname === "electronicandapplian") {
       setElectroandapp(true);
     }
-    else if(getcategoryname === "properties")
-    {
+    else if (getcategoryname === "properties") {
       setProperty(true);
     }
-    else if(getcategoryname === "astrology")
-    {
+    else if (getcategoryname === "astrology") {
       setAstrologies(true);
     }
-  },[])
+  }, [])
 
   console.log(allsubcategoriesdata);
-  console.log(router.query.category[0]);
+  console.log(router.query.uri);
 
   return (
     <div>
@@ -89,58 +87,70 @@ export default function filterproperty({ subcategory }) {
         <div className="accordion-item">
           <h2 className="accordion-header" id="panelsStayOpen-headingOne">
             <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-              <i class="bx bx-buildings mx-1 text-brand"></i> {router.query.category[0].charAt(0).toUpperCase() + router.query.category[0].slice(1).toLowerCase()}
+              <i class="bx bx-buildings mx-1 text-brand"></i> {router.query.uri.charAt(0).toUpperCase() + router.query.uri.slice(1).toLowerCase()}
             </button>
           </h2>
           <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
             <div className="accordion-body">
               <div className="filter-product-checkboxs">
-                {
-                  automobiles ?
-                    <div>
+
+                {/* {
+                  
+                } */}
+
+                    
                       {
-                        automobiless.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1,2));
+                        automobiles ? 
+                        <div>
+                          {
+                          automobiless.map((ele, ind) => {
+                          console.log(ele.categories.nodes);
                           return (
                             <div>
                               {
                                 ele.categories.nodes.map((e) => {
-                                  
-                                console.log(e.name)
-                                  return (
-                                    <div>
-                                      <a href={"/"+`${e.name}`}  className="text-dark">
-                                        <label className="custom-control form-checkbox mb-3">
-                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
-                                        </label>
-                                      </a>
-                                    </div>
-                                  )
 
-                                })
-                              }
+                                  var c = 0;
+                                  console.log(c);
+
+                                
+                                    return (
+                                      <div>
+                                        <a href={`${router.query.uri}`+"/"+`${e.slug}`} onClick={()=>{console.log("count")}} className="text-dark">
+                                          <label className="custom-control form-checkbox mb-3">
+                                            <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
+                                          </label>
+                                        </a>
+                                      </div>
+                                    )
+                                  }
+                                
+
+                                )}
+
                             </div>
                           )
-                        })
+                                })
+                              }
+                              </div>:null                     
                       }
                       
-                    </div> : null
-                }
+    
                 {
                   service ?
                     <div>
                       {
                         services.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1,2));
+                          console.log(ele.categories.nodes.slice(1, 2));
                           return (
                             <div>
                               {
                                 ele.categories.nodes.map((e) => {
-                                  
-                                console.log(e.name)
+
+                                  console.log(e.name)
                                   return (
                                     <div>
-                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
                                           <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
@@ -153,7 +163,7 @@ export default function filterproperty({ subcategory }) {
                           )
                         })
                       }
-                      
+
                     </div> : null
                 }
                 {
@@ -161,16 +171,16 @@ export default function filterproperty({ subcategory }) {
                     <div>
                       {
                         jobss.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1,2));
+                          console.log(ele.categories.nodes.slice(1, 2));
                           return (
                             <div>
                               {
                                 ele.categories.nodes.map((e) => {
-                                  
-                                console.log(e.name)
+
+                                  console.log(e.name)
                                   return (
                                     <div>
-                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
                                           <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
@@ -184,7 +194,7 @@ export default function filterproperty({ subcategory }) {
                           )
                         })
                       }
-                      
+
                     </div> : null
                 }
                 {
@@ -192,16 +202,16 @@ export default function filterproperty({ subcategory }) {
                     <div>
                       {
                         electrandap.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1,2));
+                          console.log(ele.categories.nodes.slice(1, 2));
                           return (
                             <div>
                               {
                                 ele.categories.nodes.map((e) => {
-                                  
-                                console.log(e.name)
+
+                                  console.log(e.name)
                                   return (
                                     <div>
-                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
                                           <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
@@ -215,7 +225,7 @@ export default function filterproperty({ subcategory }) {
                           )
                         })
                       }
-                      
+
                     </div> : null
                 }
                 {
@@ -223,16 +233,16 @@ export default function filterproperty({ subcategory }) {
                     <div>
                       {
                         properties.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1,2));
+                          console.log(ele.categories.nodes.slice(1, 2));
                           return (
                             <div>
                               {
                                 ele.categories.nodes.map((e) => {
-                                  
-                                console.log(e.name)
+
+                                  console.log(e.name)
                                   return (
                                     <div>
-                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
                                           <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
@@ -246,7 +256,6 @@ export default function filterproperty({ subcategory }) {
                           )
                         })
                       }
-                      
                     </div> : null
                 }
                 {
@@ -254,16 +263,16 @@ export default function filterproperty({ subcategory }) {
                     <div>
                       {
                         astrology.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1,2));
+                          console.log(ele.categories.nodes.slice(1, 2));
                           return (
                             <div>
                               {
                                 ele.categories.nodes.map((e) => {
-                                  
-                                console.log(e.name)
+
+                                  console.log(e.name)
                                   return (
                                     <div>
-                                      <a href={"/"+`${e.name}`}  className="text-dark">
+                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
                                           <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
@@ -277,10 +286,10 @@ export default function filterproperty({ subcategory }) {
                           )
                         })
                       }
-                      
+
                     </div> : null
                 }
-                
+
               </div>
             </div>
           </div>

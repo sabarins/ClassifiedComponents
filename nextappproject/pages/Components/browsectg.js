@@ -47,7 +47,7 @@ export default function browsectg() {
     <div className="row">
       <div className="col-12">
         <div className="intro">
-          <h2>Browse category</h2>                            
+          <h2>Browse Category</h2>                            
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@ export default function browsectg() {
       <div className="item">
          <div className="mb-0"> 
             <div className="cat-item text-center">
-            <Link href="/innerlistings" className="dropdown-item"><div className="cat-img">
+            <Link href="/properties" className="dropdown-item"><div className="cat-img">
               <Image
         alt="Property"
         src={properyIcon}        
@@ -77,7 +77,7 @@ export default function browsectg() {
       <div className="item">
          <div className="mb-0"> 
             <div className="cat-item text-center">
-            <Link href="/innerlistings" className="dropdown-item"><div className="cat-img">
+            <Link href="/electronicandapplian" className="dropdown-item"><div className="cat-img">
               <Image
         alt="Electronics"
         src={electronicsIcon}        
@@ -105,7 +105,7 @@ export default function browsectg() {
       <div className="item">
          <div className="mb-0"> 
             <div className="cat-item text-center">
-            <Link href="/innerlistings" className="dropdown-item"><div className="cat-img">
+            <Link href="/astrology" className="dropdown-item"><div className="cat-img">
               <Image
         alt="Astrology"
         src={astrologyIcon}        

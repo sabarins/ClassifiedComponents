@@ -18,7 +18,7 @@ import { useState } from 'react';
 import Search from './Components/Search';
 
 
- export default function Home({allsearchdata, jobsdata, jobsfeatures, automobilesdata, servicesdata, propertiesdata, astrologydata, electandappl }) {
+ export default function Home({allsearchdata, jobsdata, jobsfeatures, automobilesdata, servicesdata, propertydata, astrologydata, electandappl }) {
   console.log(allsearchdata);
 
 
@@ -29,7 +29,7 @@ import Search from './Components/Search';
         <Section1 searchdata={allsearchdata}></Section1>
         <Browsectg></Browsectg>
         <div className='displayallcards'>
-          <AllCtegoriescards alljobsdata={jobsdata} jobfeature={jobsfeatures} amdata={automobilesdata} servicedata={servicesdata} propertydata={propertiesdata}
+          <AllCtegoriescards alljobsdata={jobsdata} jobfeature={jobsfeatures} amdata={automobilesdata} servicedata={servicesdata} propertydata={propertydata}
             astrologiesdata={astrologydata} elecandappl={electandappl} />
         </div>
       </Format>
@@ -42,7 +42,6 @@ import Search from './Components/Search';
 
   console.log("serverside",getvalue)
 
-  let searchinp = "wanted";
   const { data } = await client.query({
     query: gql`
       query NewQuery {
@@ -57,6 +56,7 @@ import Search from './Components/Search';
             }
             title
             uri
+            id
             date
           }
         }
@@ -74,6 +74,7 @@ import Search from './Components/Search';
             }
             title
             uri
+            id
             date
           }
         }
@@ -90,6 +91,7 @@ import Search from './Components/Search';
             uri
             title
             date
+            id
           }
         }
         allProperties {
@@ -110,6 +112,7 @@ import Search from './Components/Search';
             }
             title
             uri
+            id
             date
           }
         }
@@ -125,6 +128,7 @@ import Search from './Components/Search';
             }
             title
             uri
+            id
             date
           }
         }
@@ -144,118 +148,13 @@ import Search from './Components/Search';
             title
             uri
             date
+            id
           }
         }
       }
       `
 
   });
-
-  const newdata = await client.query({
-    query : gql `
-
-     query newquery($searchinp : String!)
-     {
-      allAstrology(where: {search:$searchinp}) {
-        nodes {
-          astrofeatures {
-            address
-            contactNumber
-            description
-            location
-          }
-          title
-        }
-      }
-      allJobs(where: {search: $searchinp}) {
-        nodes {
-          jobfeatures {
-            address
-            alternateContanctNumber
-            city
-            contactNumber
-            description
-            jobPosition
-            location
-            salaryFrom
-            salaryTo
-          }
-          title
-        }
-      }
-      allProperties(where: {search:$searchinp}) {
-        nodes {
-          propertyfeatures {
-            acre
-            address
-            alternateContactNumber
-            cent
-            city
-            contactNumber
-            description
-            fieldGroupName
-            location
-            price
-            priceTo
-            sqft
-          }
-          title
-          uri
-        }
-      }
-      allServices(where: {search:$searchinp}) {
-        nodes {
-          servicefeatures {
-            address
-            alternateContactNumber
-            contactNumber
-            description
-            location
-            price
-            sqft
-          }
-          title
-          uri
-        }
-      }
-       allElectronicsAndAppliances(where: {search:$searchinp}) {
-        nodes {
-          eleandappfeatures {
-            address
-            alternateContactNumber
-            contactNumber
-            description
-            location
-          }
-          title
-          uri
-        }
-      }
-       automobiles(where: {search:$searchinp}) {
-        nodes {
-          automobfeatures {
-            address
-            alternateContactNumber
-            contactNumber
-            description
-            fieldGroupName
-            location
-          }
-          title
-          uri
-        }
-      }
-
-     }
-    `,
-    
-    variables: {
-      searchinp,
-    },
-  });
-
-    console.log(searchinp);
-
 
 
   console.log("h", data.automobiles, "d", data.allServices);
@@ -265,10 +164,9 @@ import Search from './Components/Search';
       jobsfeatures: data.allJobs.nodes.jobfeatures || null,
       automobilesdata: data.automobiles.nodes,
       servicesdata: data.allServices.nodes,
-      propertiesdata: data.allProperties.nodes,
+      propertydata: data.allProperties.nodes,
       astrologydata: data.allAstrology.nodes,
       electandappl: data.allElectronicsAndAppliances.nodes,
-      allsearchdata : newdata || null
     }
   }
 

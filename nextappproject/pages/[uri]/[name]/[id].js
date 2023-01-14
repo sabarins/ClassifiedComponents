@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link';
 import { gql } from "@apollo/client";
-import client from '../../client';
 import axios from 'axios';
-import Logout from '../Components/Logout';
-import WayNavbar from '../WayNavbar';
-import Format from "../layout/Format"
-import Bredcrumb from "../Components/_child/bredcrumb"
-import Filterproperty from "../Components/filterproperty"
-import Advtsmall from "../Components/advtsmall"
-import Header from '../Components/header';
-import APILog from '../APILogin/APILog'
+// import Logout from '../Components/Logout';
+// import WayNavbar from '../WayNavbar';
+// import Filterproperty from "../Components/filterproperty"
+import Advtsmall from "../../Components/advtsmall"
+// import Header from '../Components/header';
+// import APILog from '../APILogin/APILog'
 import Image from "next/image";
 import houseImage from '/public/img/housesale.jpg';
+import client from '../../../client';
+import Format from '../../layout/Format';
+import Bredcrumb from '../../Components/_child/bredcrumb';
+
 
 
 
@@ -24,6 +25,8 @@ export default function DetailsPage({categorydetail,automobilefeatures,jobsfeatu
 console.log(categorydetail);
 
     let router = useRouter();
+
+    console.log("URI:",router.query.uri,"NAME:",router.query.name)
 
     let [categorydetails,setCategorydetails] = useState([]);
 
@@ -249,19 +252,14 @@ console.log(categorydetail);
    <li className> <i className="bx bx-directions mx-1 text-brand"></i> Kilaku Vasal </li>
     </ul> 
     </div> 
-
-    
-
     </div>
     <hr/>
     <div>
        <h3>Posted in</h3>
-
           {
             router.query.uri==="automobile" ? 
             <div>
               <p>{automobilefeatures.city} {automobilefeatures.location}</p>
-
             <p>Contact Number : 
               <span className="btn mx-2 btn-outline-dark ">
                 {logged  ? <span style={{fontWeight:"bolder"}}>{automobilefeatures.contactNumber}</span> : <a href="#hideshow" onClick={()=>{
@@ -459,7 +457,7 @@ console.log(categorydetail);
                   data-aut-id="error-phone"
                 />
               </div>
-
+      
 
               <p id="deschide" className="_3bCAe">
                 <span>
@@ -523,7 +521,7 @@ console.log(categorydetail);
     </div>
     </div>
     </div>
-    </Format>
+  </Format>
    
   )
 }
@@ -533,7 +531,7 @@ export async function getServerSideProps(context)
 {
 
   const uri = "/"+`${context.query.uri}`+"/"+`${context.query.name}`;
-  console.log(uri);
+  console.log("serveruri",uri);
   const {data} = await client.query(
     {
       query: gql `
@@ -665,43 +663,3 @@ export async function getServerSideProps(context)
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export async function getStaticPaths({params})
-// {
-//   const { data } = await client.query({
-//     query: gql`
-//     query NewQuery($id: String) {
-//       post(id: $id, idType: URI) {
-//         jobsFeatures {
-//           address
-//           contactNumber
-//           courseDetails
-//         }
-//         blocksJSON
-//         uri
-//         title
-//       }
-//     }
-//     `,
-//     variables: {
-//       id: params.uri
-//     }
-//   });
-
-//   return{
-    
-//   };
-// };
