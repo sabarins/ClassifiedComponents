@@ -127,7 +127,7 @@ export default function subcategory({ allcdata, allcategorydata }) {
                               <div className="col-md-4 col-6" key={ind}>
                                 <article className="blog-post">
                                   <a href={`${ele.uri}${ele.id}`}>
-                                    <Image alt="jobimg" src={dummyImage} />
+                                    <Image alt="img" src={dummyImage} />
                                     <small>{ele.date}</small>
                                     <div className="content">
                                       <h5>{ele.title}</h5>
@@ -237,6 +237,7 @@ export default function subcategory({ allcdata, allcategorydata }) {
                                 {
                                   jobss.map((ele, ind) => {
                                     console.log(ele.categories.nodes.slice(1, 2));
+                                    
                                     return (
                                       <div>
                                         {

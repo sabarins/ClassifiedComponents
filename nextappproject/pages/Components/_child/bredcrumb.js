@@ -23,6 +23,7 @@ export default function Bredcrumb({ allcategorydata, sub }) {
     if (router.query.uri && router.query.name && router.query.id) {
       setShowbredcrumb(true);
     }
+    
     else if(router.query.uri) {
       setCategoryway(true);
     }

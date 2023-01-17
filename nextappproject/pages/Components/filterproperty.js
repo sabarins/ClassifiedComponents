@@ -19,7 +19,41 @@ export default function filterproperty({ subcategory, alldata }) {
   let electrandap = alldata.allElectronicsAndAppliances.nodes;
   let jobss = alldata.allJobs.nodes;
 
+  console.log(jobss.categories);
 
+  let obj = [
+    {
+      name: null,
+      slug: null,
+    }
+  ];
+
+  let namearr = [];
+  let arr2 = [];
+
+
+  jobss.forEach((item) => {
+    item.categories.nodes.forEach((el) => {
+      namearr.push(el.name);
+    })
+  });
+
+  let newarr = new Set(namearr);
+  // let newarr2 = new Set(slug);
+
+  newarr.forEach((ele) => {
+    arr2.push(ele);
+  })
+
+  // newarr2.forEach((ele) => {
+  //   slug2.push(ele);
+  // })
+
+
+
+
+
+  // Following are Usestate() 
   let getcategoryname = router.query.uri;
 
   console.log(getcategoryname);
@@ -40,7 +74,7 @@ export default function filterproperty({ subcategory, alldata }) {
 
   let [allsubcategoriesdata, setAllsubcategoriesdata] = useState([]);
 
-  console.log(router.query.uri,router.query.name);
+  console.log(router.query.uri, router.query.name);
 
   useEffect(() => {
 
@@ -98,12 +132,11 @@ export default function filterproperty({ subcategory, alldata }) {
                   
                 } */}
 
-                    
+                {
+                  automobiles ?
+                    <div>
                       {
-                        automobiles ? 
-                        <div>
-                          {
-                          automobiless.map((ele, ind) => {
+                        automobiless.map((ele, ind) => {
                           console.log(ele.categories.nodes);
                           return (
                             <div>
@@ -113,29 +146,29 @@ export default function filterproperty({ subcategory, alldata }) {
                                   var c = 0;
                                   console.log(c);
 
-                                
-                                    return (
-                                      <div>
-                                        <a href={`${router.query.uri}`+"/"+`${e.slug}`} onClick={()=>{console.log("count")}} className="text-dark">
-                                          <label className="custom-control form-checkbox mb-3">
-                                            <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
-                                          </label>
-                                        </a>
-                                      </div>
-                                    )
-                                  }
-                                
+
+                                  return (
+                                    <div>
+                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} onClick={() => { console.log("count") }} className="text-dark">
+                                        <label className="custom-control form-checkbox mb-3">
+                                          <i className="bx bx-minus mx-1" /> {e.name}<span className="label label-secondary float-end">14</span>
+                                        </label>
+                                      </a>
+                                    </div>
+                                  )
+                                }
+
 
                                 )}
 
                             </div>
                           )
-                                })
-                              }
-                              </div>:null                     
+                        })
                       }
-                      
-    
+                    </div> : null
+                }
+
+
                 {
                   service ?
                     <div>
@@ -150,7 +183,7 @@ export default function filterproperty({ subcategory, alldata }) {
                                   console.log(e.name)
                                   return (
                                     <div>
-                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
+                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
                                           <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
@@ -163,38 +196,28 @@ export default function filterproperty({ subcategory, alldata }) {
                           )
                         })
                       }
-
                     </div> : null
                 }
+
                 {
                   jobs ?
                     <div>
                       {
-                        jobss.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1, 2));
-                          return (
-                            <div>
-                              {
-                                ele.categories.nodes.map((e) => {
+                        arr2.map((el) => {
+                            console.log(el);
+                            return (
+                              <div>
+                                <a href={`${router.query.uri}` + "/" + `${el}`} onClick={() => { console.log("count") }} className="text-dark">
 
-                                  console.log(e.name)
-                                  return (
-                                    <div>
-                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
-                                        <label className="custom-control form-checkbox mb-3">
-                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
-                                        </label>
-                                      </a>
-                                    </div>
-                                  )
+                                  <label className="custom-control form-checkbox mb-3">
+                                    <i className="bx bx-minus mx-1" />{el} <span className="label label-secondary float-end">14</span>
+                                  </label>
+                                </a>
+                              </div>
+                            )
+                          })
 
-                                })
-                              }
-                            </div>
-                          )
-                        })
                       }
-
                     </div> : null
                 }
                 {
@@ -211,7 +234,7 @@ export default function filterproperty({ subcategory, alldata }) {
                                   console.log(e.name)
                                   return (
                                     <div>
-                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
+                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
                                           <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
@@ -242,7 +265,7 @@ export default function filterproperty({ subcategory, alldata }) {
                                   console.log(e.name)
                                   return (
                                     <div>
-                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
+                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
                                           <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
@@ -272,7 +295,7 @@ export default function filterproperty({ subcategory, alldata }) {
                                   console.log(e.name)
                                   return (
                                     <div>
-                                      <a href={`${router.query.uri}`+"/"+`${e.slug}`} className="text-dark">
+                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} className="text-dark">
                                         <label className="custom-control form-checkbox mb-3">
                                           <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
                                         </label>
