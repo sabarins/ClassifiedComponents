@@ -19,40 +19,232 @@ export default function filterproperty({ subcategory, alldata }) {
   let electrandap = alldata.allElectronicsAndAppliances.nodes;
   let jobss = alldata.allJobs.nodes;
 
-  console.log(jobss.categories);
+  // Job Category
 
-  let obj = [
-    {
-      name: null,
-      slug: null,
-    }
-  ];
+  // For Job category storing subcategory name and slug.
+  let obj = [];
 
+  // it will store default name  
   let namearr = [];
+  // it is for storing only unique elements for name in array
   let arr2 = [];
+
+  //same as creating the slug for store default slug
+  let slug = [];
+  // it is for storing only unique elements for slug
+  let slugarr = [];
 
 
   jobss.forEach((item) => {
     item.categories.nodes.forEach((el) => {
       namearr.push(el.name);
+      slug.push(el.slug);
     })
   });
-
   let newarr = new Set(namearr);
-  // let newarr2 = new Set(slug);
-
+  let newarr2 = new Set(slug);
   newarr.forEach((ele) => {
     arr2.push(ele);
   })
+  newarr2.forEach((el) => {
+    slugarr.push(el);
+  })
+  arr2.forEach((elem, ind) => {
+    obj.push({ lname: elem, slug: slugarr[ind] });
+  })
+  console.log(obj);
 
-  // newarr2.forEach((ele) => {
-  //   slug2.push(ele);
-  // })
+  // Property category
+
+  // For Property category storing subcategory name and slug.
+  let propertyobj = [];
+
+  // it will store default name  
+  let propnamearr = [];
+  // it is for storing only unique elements for name in array
+  let proparr2 = [];
+
+  //same as creating the slug for store default slug
+  let propslug = [];
+  // it is for storing only unique elements for slug
+  let propslugarr = [];
+  properties.forEach((item) => {
+    item.categories.nodes.forEach((el) => {
+      propnamearr.push(el.name);
+      propslug.push(el.slug);
+    })
+  });
+
+  let propnewarr = new Set(propnamearr);
+  let propnewarr2 = new Set(propslug);
 
 
+  propnewarr.forEach((ele) => {
+    proparr2.push(ele);
+  })
+
+  propnewarr2.forEach((el) => {
+    propslugarr.push(el);
+  })
+
+  proparr2.forEach((elem, ind) => {
+    propertyobj.push({ lname: elem, slug: propslugarr[ind] });
+  })
 
 
+  // ElectronicaAnd Applicances category
 
+  // For Property category storing subcategory name and slug.
+  let electappobj = [];
+
+  // it will store default name  
+  let electrnamearr = [];
+  // it is for storing only unique elements for name in array
+  let electarr2 = [];
+
+  //same as creating the slug for store default slug
+  let electslug = [];
+  // it is for storing only unique elements for slug
+  let electslugarr = [];
+  electrandap.forEach((item) => {
+    item.categories.nodes.forEach((el) => {
+      electrnamearr.push(el.name);
+      electslug.push(el.slug);
+    })
+  });
+
+  let electrnewarr = new Set(electrnamearr);
+  let electrnewarr2 = new Set(electslug);
+
+
+  electrnewarr.forEach((ele) => {
+    electarr2.push(ele);
+  })
+
+  electrnewarr2.forEach((el) => {
+    electslugarr.push(el);
+  })
+
+  electarr2.forEach((elem, ind) => {
+    electappobj.push({ lname: elem, slug: electslugarr[ind] });
+  })
+
+
+  // Astrology category
+
+  // For Property category storing subcategory name and slug.
+  let astrologyobj = [];
+
+  // it will store default name  
+  let astrologynamearr = [];
+  // it is for storing only unique elements for name in array
+  let astrologyarr2 = [];
+
+  //same as creating the slug for store default slug
+  let astrologyslug = [];
+  // it is for storing only unique elements for slug
+  let astrologyslugarr = [];
+  astrology.forEach((item) => {
+    item.categories.nodes.forEach((el) => {
+      astrologynamearr.push(el.name);
+      astrologyslug.push(el.slug);
+    })
+  });
+
+  let astrologynewarr = new Set(astrologynamearr);
+  let astrologynewarr2 = new Set(astrologyslug);
+
+
+  astrologynewarr.forEach((ele) => {
+    astrologyarr2.push(ele);
+  })
+
+  astrologynewarr2.forEach((el) => {
+    astrologyslugarr.push(el);
+  })
+
+  astrologyarr2.forEach((elem, ind) => {
+    astrologyobj.push({ lname: elem, slug: astrologyslugarr[ind] });
+  })
+
+ // Service category
+
+  // For Property category storing subcategory name and slug.
+  let serviceobj = [];
+
+  // it will store default name  
+  let servicenamearr = [];
+  // it is for storing only unique elements for name in array
+  let servicearr2 = [];
+
+  //same as creating the slug for store default slug
+  let serviceslug = [];
+  // it is for storing only unique elements for slug
+  let serviceslugarr = [];
+  services.forEach((item) => {
+    item.categories.nodes.forEach((el) => {
+      servicenamearr.push(el.name);
+      serviceslug.push(el.slug);
+    })
+  });
+
+  let servicenewarr = new Set(servicenamearr);
+  let servicenewarr2 = new Set(serviceslug);
+
+
+  servicenewarr.forEach((ele) => {
+    servicearr2.push(ele);
+  })
+
+  servicenewarr2.forEach((el) => {
+    serviceslugarr.push(el);
+  })
+
+  servicearr2.forEach((elem, ind) => {
+    serviceobj.push({ lname: elem, slug: serviceslugarr[ind] });
+  })
+
+  // Automobiles category
+
+  // For Property category storing subcategory name and slug.
+  let automobileobj = [];
+
+  // it will store default name  
+  let automobilenamearr = [];
+  // it is for storing only unique elements for name in array
+  let automobilearr2 = [];
+
+  //same as creating the slug for store default slug
+  let automobileslug = [];
+  let automobilecount = [];
+  // it is for storing only unique elements for slug
+  let automobileslugarr = [];
+  automobiless.forEach((item) => {
+    item.categories.nodes.forEach((el) => {
+      automobilenamearr.push(el.name);
+      automobileslug.push(el.slug);
+      automobilecount.push(el.count);
+    })
+  });
+
+  let automobilenewarr = new Set(automobilenamearr);
+  let automobilenewarr2 = new Set(automobileslug);
+  let automobilenewarr3 = new Set(automobilecount);
+
+
+  automobilenewarr.forEach((ele) => {
+    automobilearr2.push(ele);
+  })
+
+  automobilenewarr2.forEach((el) => {
+    automobileslugarr.push(el);
+  })
+
+  automobilearr2.forEach((elem, ind) => {
+    automobileobj.push({ lname: elem, slug: automobileslugarr[ind], count: automobilecount});
+  })
+
+  console.log(automobilecount)
   // Following are Usestate() 
   let getcategoryname = router.query.uri;
 
@@ -136,86 +328,61 @@ export default function filterproperty({ subcategory, alldata }) {
                   automobiles ?
                     <div>
                       {
-                        automobiless.map((ele, ind) => {
-                          console.log(ele.categories.nodes);
+                        automobileobj.map((el) => {
+                          console.log(el);
                           return (
                             <div>
-                              {
-                                ele.categories.nodes.map((e) => {
+                              <a href={`${router.query.uri}` + "/" + `${el.slug}`} className="text-dark">
 
-                                  var c = 0;
-                                  console.log(c);
-
-
-                                  return (
-                                    <div>
-                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} onClick={() => { console.log("count") }} className="text-dark">
-                                        <label className="custom-control form-checkbox mb-3">
-                                          <i className="bx bx-minus mx-1" /> {e.name}<span className="label label-secondary float-end">14</span>
-                                        </label>
-                                      </a>
-                                    </div>
-                                  )
-                                }
-
-
-                                )}
-
+                                <label className="custom-control form-checkbox mb-3">
+                                  <i className="bx bx-minus mx-1" />{el.lname} <span className="label label-secondary float-end">{el.count}</span>
+                                </label>
+                              </a>
                             </div>
                           )
                         })
+
                       }
                     </div> : null
                 }
-
-
                 {
                   service ?
                     <div>
-                      {
-                        services.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1, 2));
+                     {
+                        serviceobj.map((el) => {
+                          console.log(el);
                           return (
                             <div>
-                              {
-                                ele.categories.nodes.map((e) => {
+                              <a href={`${router.query.uri}` + "/" + `${el.slug}`} onClick={() => { console.log("count") }} className="text-dark">
 
-                                  console.log(e.name)
-                                  return (
-                                    <div>
-                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} className="text-dark">
-                                        <label className="custom-control form-checkbox mb-3">
-                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
-                                        </label>
-                                      </a>
-                                    </div>
-                                  )
-                                })
-                              }
+                                <label className="custom-control form-checkbox mb-3">
+                                  <i className="bx bx-minus mx-1" />{el.lname} <span className="label label-secondary float-end">14</span>
+                                </label>
+                              </a>
                             </div>
                           )
                         })
+
                       }
                     </div> : null
                 }
-
                 {
                   jobs ?
                     <div>
                       {
-                        arr2.map((el) => {
-                            console.log(el);
-                            return (
-                              <div>
-                                <a href={`${router.query.uri}` + "/" + `${el}`} onClick={() => { console.log("count") }} className="text-dark">
+                        obj.map((el) => {
+                          console.log(el);
+                          return (
+                            <div>
+                              <a href={`${router.query.uri}` + "/" + `${el.slug}`} onClick={() => { console.log("count") }} className="text-dark">
 
-                                  <label className="custom-control form-checkbox mb-3">
-                                    <i className="bx bx-minus mx-1" />{el} <span className="label label-secondary float-end">14</span>
-                                  </label>
-                                </a>
-                              </div>
-                            )
-                          })
+                                <label className="custom-control form-checkbox mb-3">
+                                  <i className="bx bx-minus mx-1" />{el.lname} <span className="label label-secondary float-end">14</span>
+                                </label>
+                              </a>
+                            </div>
+                          )
+                        })
 
                       }
                     </div> : null
@@ -224,60 +391,41 @@ export default function filterproperty({ subcategory, alldata }) {
                   electroandapp ?
                     <div>
                       {
-                        electrandap.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1, 2));
+                        electappobj.map((el) => {
+                          console.log(el);
                           return (
                             <div>
-                              {
-                                ele.categories.nodes.map((e) => {
+                              <a href={`${router.query.uri}` + "/" + `${el.slug}`} onClick={() => { console.log("count") }} className="text-dark">
 
-                                  console.log(e.name)
-                                  return (
-                                    <div>
-                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} className="text-dark">
-                                        <label className="custom-control form-checkbox mb-3">
-                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
-                                        </label>
-                                      </a>
-                                    </div>
-                                  )
-
-                                })
-                              }
+                                <label className="custom-control form-checkbox mb-3">
+                                  <i className="bx bx-minus mx-1" />{el.lname} <span className="label label-secondary float-end">14</span>
+                                </label>
+                              </a>
                             </div>
                           )
                         })
-                      }
 
+                      }
                     </div> : null
                 }
                 {
                   property ?
                     <div>
                       {
-                        properties.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1, 2));
+                        propertyobj.map((el) => {
+                          console.log(el);
                           return (
                             <div>
-                              {
-                                ele.categories.nodes.map((e) => {
+                              <a href={`${router.query.uri}` + "/" + `${el.slug}`} onClick={() => { console.log("count") }} className="text-dark">
 
-                                  console.log(e.name)
-                                  return (
-                                    <div>
-                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} className="text-dark">
-                                        <label className="custom-control form-checkbox mb-3">
-                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
-                                        </label>
-                                      </a>
-                                    </div>
-                                  )
-
-                                })
-                              }
+                                <label className="custom-control form-checkbox mb-3">
+                                  <i className="bx bx-minus mx-1" />{el.lname} <span className="label label-secondary float-end">14</span>
+                                </label>
+                              </a>
                             </div>
                           )
                         })
+
                       }
                     </div> : null
                 }
@@ -285,29 +433,20 @@ export default function filterproperty({ subcategory, alldata }) {
                   astrologies ?
                     <div>
                       {
-                        astrology.map((ele, ind) => {
-                          console.log(ele.categories.nodes.slice(1, 2));
+                        astrologyobj.map((el) => {
+                          console.log(el);
                           return (
                             <div>
-                              {
-                                ele.categories.nodes.map((e) => {
+                              <a href={`${router.query.uri}` + "/" + `${el.slug}`} onClick={() => { console.log("count") }} className="text-dark">
 
-                                  console.log(e.name)
-                                  return (
-                                    <div>
-                                      <a href={`${router.query.uri}` + "/" + `${e.slug}`} className="text-dark">
-                                        <label className="custom-control form-checkbox mb-3">
-                                          <i className="bx bx-minus mx-1" /> {e.name} <span className="label label-secondary float-end">14</span>
-                                        </label>
-                                      </a>
-                                    </div>
-                                  )
-
-                                })
-                              }
+                                <label className="custom-control form-checkbox mb-3">
+                                  <i className="bx bx-minus mx-1" />{el.lname} <span className="label label-secondary float-end">14</span>
+                                </label>
+                              </a>
                             </div>
                           )
                         })
+
                       }
 
                     </div> : null

@@ -551,6 +551,7 @@ export async function getServerSideProps(context)
           categories {
             nodes {
               name
+              slug
             }
           }
           title
@@ -567,6 +568,12 @@ export async function getServerSideProps(context)
             location
             fieldGroupName
           }
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
           date
           title
           uri
@@ -580,6 +587,12 @@ export async function getServerSideProps(context)
             description
             fieldGroupName
             location
+          }
+          categories {
+            nodes {
+              name
+              slug
+            }
           }
           date
           title
@@ -598,6 +611,12 @@ export async function getServerSideProps(context)
             location
             salaryFrom
             salaryTo
+          }
+          categories {
+            nodes {
+              name
+              slug
+            }
           }
           title
           uri
@@ -619,6 +638,12 @@ export async function getServerSideProps(context)
             priceTo
             sqft
           }
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
           title
           uri
           date
@@ -635,6 +660,12 @@ export async function getServerSideProps(context)
             location
             price
             sqft
+          }
+          categories {
+            nodes {
+              name
+              slug
+            }
           }
           title
           uri

@@ -34,7 +34,6 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
   let [electrandappldats, setElectrandappldats] = useState(elecandappl);
 
 
-
   let [allcategorydatas, setAllcategorydatas] = useState([]);
 
   useEffect(() => {
@@ -70,7 +69,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
             allcategorydatas.map((ele, ind) => {
               if (ele.__typename === "Jobs") {
                 return (
-                  <div class="col-md-3 col-6" key={ind}>
+                  <div class="col-md-3 col-6" id='key' key={ind}>
                     <article class="blog-post">
                       <a href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
@@ -78,7 +77,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                         <div class="content">
                           <h5>{ele.title}</h5>
                           {/* <p>Qualification : <b style={{fontWeight:"bold"}}>{ele.jobsFeatures.qualification}</b></p> */}
-                          <p>Location : {ele.jobfeatures.location}</p>
+                          <p>Location : {ele.jobfeatures.location }</p>
                           <span style={{ fontWeight: "bold" }}>Jobs</span>
                           {/* <span style={{fontWeight:"bold"}} class="text-muted">{ele.date}</span> */}
                         </div>
@@ -91,7 +90,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}${ele.id}`}>
+                      <Link href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">
@@ -99,7 +98,7 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                           <p>Location : {ele.automobfeatures.location}</p>
                           <span style={{ fontWeight: "bold" }}>Automobiles</span>
                         </div>
-                      </a>
+                      </Link>
                     </article>
                   </div>
                 )
@@ -108,14 +107,14 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}${ele.id}`}>
+                      <Link href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">
                           <h5>{ele.title}</h5>
                           <span style={{ fontWeight: "bold" }}>Services</span>
                         </div>
-                      </a>
+                      </Link>
                     </article>
                   </div>
                 )
@@ -124,14 +123,14 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}${ele.id}`}>
+                      <Link href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">
                           <h5>{ele.title}</h5>
                           <span style={{ fontWeight: "bold" }}>Properties</span>
                         </div>
-                      </a>
+                      </Link>
                     </article>
                   </div>
                 )
@@ -140,14 +139,14 @@ export default function AllCtegoriescards({ alljobsdata, jobfeature, amdata, ser
                 return (
                   <div class="col-md-3 col-6" key={ind}>
                     <article class="blog-post">
-                      <a href={`${ele.uri}${ele.id}`}>
+                      <Link href={`${ele.uri}${ele.id}`}>
                         <Image alt="jobimg" src={dummyImage} />
                         <small>{ele.date}</small>
                         <div class="content">
                           <h5>{ele.title}</h5>
                           <span style={{ fontWeight: "bold" }}>Astrology</span>
                         </div>
-                      </a>
+                      </Link>
                     </article>
                   </div>
                 )

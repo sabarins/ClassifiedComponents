@@ -26,12 +26,12 @@ export default function LocationPage({ alldatas }) {
 
     console.log(getlocatname);
     return (
-      
-            <Format>
-                <div className="container">
-                    <div className="row mt-4">
-                        <div className="col-xl-9 col-lg-8 col-md-12">
-                            <div className='row relative'>
+
+        <Format>
+            <div className="container">
+                <div className="row mt-4">
+                    <div className="col-xl-9 col-lg-8 col-md-12">
+                        <div className='row relative'>
                             {
                                 astrolocation.map((ele, ind) => {
                                     if (getlocatname === ele.astrofeatures.location) {
@@ -158,14 +158,14 @@ export default function LocationPage({ alldatas }) {
                                     }
                                 })
                             }
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-12">
-                            <Advtsmall></Advtsmall>
                         </div>
                     </div>
+                    <div className="col-xl-3 col-lg-4 col-md-12">
+                        <Advtsmall></Advtsmall>
+                    </div>
                 </div>
-            </Format>
+            </div>
+        </Format>
 
     )
 }
